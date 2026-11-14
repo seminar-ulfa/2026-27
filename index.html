@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tomaž Berčič">
+<title>Odzivni teritoriji 2026/27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* paleta iz paketa hubcities_reduced: industrija 121, obdobja, kontekst */
+  --paper: #ffffff;
+  --ink: #1d1a1e;
+  --muted: #6b6470;
+  --context: #e1e1e1;
+  --existing: #9c9c9c;
+  --industry: #a80084;
+  --p0: #ffbee8; --p1: #ff73df; --p2: #e600a9; --p3: #a80084;
+  --airport: #e6e600;
+  --port: #0070ff;
+  --warn: #b35c00;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+  --mono: "IBM Plex Mono", Consolas, monospace;
+  /* postavitev: levi stolpec oznake, desno vsebina; pogledi uvod / vaja 1 / vaja 2 / pregled */
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.6 var(--body); }
+a { color: var(--industry); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--industry); outline-offset: 3px; }
+img { max-width: 100%; display: block; }
+body[data-lang="sl"] .en, body[data-lang="en"] .sl { display: none; }
+
+header.top { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--context); }
+.top-inner { max-width: 1180px; margin: 0 auto; padding: 10px 24px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.brand { font: 800 15px/1 var(--display); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+.brand b { color: var(--industry); }
+nav.views { display: flex; gap: 4px; flex-wrap: wrap; font-size: 14px; }
+nav.views a { color: var(--ink); text-decoration: none; padding: 6px 10px; border-bottom: 2px solid transparent; }
+nav.views a:hover { color: var(--industry); }
+nav.views a[aria-current="page"] { border-bottom-color: var(--industry); font-weight: 600; }
+.lang { margin-left: auto; display: flex; border: 1px solid var(--ink); }
+.lang button { font: 500 12px/1 var(--mono); padding: 6px 10px; border: 0; background: transparent; cursor: pointer; color: var(--ink); }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+main { max-width: 1180px; margin: 0 auto; padding: 0 24px 80px; }
+.view[hidden] { display: none; }
+section.blk { padding: 56px 0 24px; border-bottom: 1px solid var(--context); display: grid; grid-template-columns: 200px 1fr; gap: 32px; }
+section.blk:last-child { border-bottom: 0; }
+.label { font: 500 12px/1.4 var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; padding-top: 8px; }
+.label .no { display: block; font: 800 40px/1 var(--display); color: var(--industry); margin-bottom: 8px; letter-spacing: 0; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h1 { font-weight: 800; font-size: clamp(40px, 7vw, 80px); line-height: .95; letter-spacing: -.02em; }
+h1 .sub { display: block; color: var(--existing); }
+h2 { font-weight: 700; font-size: 30px; line-height: 1.15; margin-bottom: 16px; }
+h3 { font-weight: 700; font-size: 19px; line-height: 1.25; margin-bottom: 6px; }
+p { margin: 0 0 14px; max-width: 66ch; }
+.lede { font-size: 20px; line-height: 1.5; max-width: 60ch; }
+.meta { font: 400 13px/1.5 var(--mono); color: var(--muted); }
+
+.hero { padding: 64px 0 40px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: end; border-bottom: 1px solid var(--context); }
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 14px; margin: 0; }
+.facts dt { font: 500 12px/1.6 var(--mono); color: var(--muted); text-transform: uppercase; }
+.facts dd { margin: 0; }
+.ramp { display: flex; height: 10px; margin: 28px 0 0; }
+.ramp span { flex: 1; }
+
+/* kartici vaj */
+.ex-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.ex-card { border-top: 4px solid var(--industry); padding: 18px 0 0; display: grid; gap: 10px; align-content: start; }
+.ex-card.two { border-top-color: var(--ink); }
+.ex-card .kind { font: 500 12px/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.ex-card ul { margin: 0; padding-left: 18px; font-size: 15px; }
+.btn { display: inline-block; font: 600 14px/1 var(--body); padding: 10px 14px; border: 1px solid var(--ink); color: var(--ink); text-decoration: none; justify-self: start; }
+.btn:hover { background: var(--ink); color: var(--paper); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font: 400 13px/1.4 var(--mono); margin: 18px 0 0; padding: 0; list-style: none; }
+.legend li { display: flex; align-items: center; gap: 8px; }
+.sw { width: 14px; height: 14px; display: inline-block; flex: none; }
+.sw.dash { background: none; border: 2px dashed var(--existing); }
+
+/* koraki metode */
+ol.steps { list-style: none; margin: 8px 0 0; padding: 0; counter-reset: s; display: grid; gap: 0; }
+ol.steps li { counter-increment: s; display: grid; grid-template-columns: 48px 1fr; gap: 16px; padding: 14px 0; border-top: 1px solid var(--context); }
+ol.steps li::before { content: counter(s, decimal-leading-zero); font: 500 13px/1.6 var(--mono); color: var(--industry); }
+ol.steps h3 { font-size: 17px; }
+ol.steps p { margin: 2px 0 0; font-size: 15px; }
+code { font: 400 13px/1.4 var(--mono); background: #f4f2f5; padding: 1px 4px; }
+
+.phases { list-style: none; margin: 8px 0 0; padding: 0; }
+.phase { display: grid; grid-template-columns: 120px 1fr auto; gap: 20px; padding: 16px 0; border-top: 1px solid var(--context); align-items: start; }
+.phase:last-child { border-bottom: 1px solid var(--context); }
+.phase .when { font: 500 13px/1.5 var(--mono); color: var(--muted); }
+.phase p { margin: 4px 0 0; font-size: 15px; }
+.chip { font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .05em; padding: 5px 8px; white-space: nowrap; display: inline-block; }
+.chip.done { background: var(--industry); color: #fff; }
+.chip.now { background: var(--p0); color: var(--ink); }
+.chip.next { border: 1px solid var(--existing); color: var(--muted); }
+.chip.late { background: #fbe3c9; color: #5c2f00; }
+.chip.miss { border: 1px dashed var(--warn); color: var(--warn); }
+
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 24px; }
+.note { border-left: 3px solid var(--industry); padding: 2px 0 2px 16px; font-size: 15px; }
+.note p { margin: 0; }
+.note.warn { border-left-color: var(--warn); }
+
+figure { margin: 0; }
+figcaption { font: 400 12px/1.5 var(--mono); color: var(--muted); margin-top: 8px; }
+figure img { border: 1px solid var(--context); background: #faf9f7; width: 100%; }
+.ph { aspect-ratio: var(--ar, 4/3); display: flex; align-items: flex-end; padding: 12px; background: repeating-linear-gradient(135deg, #f6f6f6 0 10px, #efefef 10px 11px); border: 1px solid var(--context); font: 400 11px/1.4 var(--mono); color: var(--muted); word-break: break-word; }
+.ph.portrait { --ar: 1145/1400; }
+.ph.landscape { --ar: 1400/875; }
+.grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; align-items: start; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+
+/* primeri študentk */
+.student { display: grid; grid-template-columns: 220px 1fr; gap: 28px; padding: 28px 0; border-top: 2px solid var(--ink); }
+.student .who h3 { font-size: 24px; }
+.student .cat { font: 500 12px/1.4 var(--mono); color: var(--industry); text-transform: uppercase; letter-spacing: .04em; margin: 8px 0; }
+.case-row { display: grid; grid-template-columns: 1fr 1.6fr; gap: 16px; align-items: start; margin-bottom: 20px; }
+.case-row .city { grid-column: 1 / -1; font: 700 15px/1.3 var(--display); display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.case-row .city .meta { font-weight: 400; }
+
+/* tabele */
+.table-wrap { overflow-x: auto; margin-top: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 720px; }
+th, td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--context); vertical-align: top; }
+th { font: 500 11px/1.4 var(--mono); text-transform: uppercase; color: var(--muted); letter-spacing: .05em; border-bottom: 1px solid var(--ink); }
+td.y, td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.n { text-align: right; }
+.matrix td, .matrix th { text-align: center; }
+.matrix td:first-child, .matrix th:first-child { text-align: left; }
+ul.plain { padding-left: 18px; margin: 0; }
+ul.plain li { margin-bottom: 6px; max-width: 70ch; }
+
+
+/* harmonika vaje 1 */
+.acc-tools { display: flex; gap: 8px; justify-content: flex-end; padding: 16px 0 0; }
+.acc-tools button { font: 500 12px/1 var(--mono); padding: 7px 10px; border: 1px solid var(--context); background: transparent; color: var(--ink); cursor: pointer; }
+.acc-tools button:hover { border-color: var(--ink); }
+details.acc { border-bottom: 1px solid var(--context); }
+details.acc > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 200px 1fr 32px; gap: 32px; align-items: center; padding: 28px 0; }
+details.acc > summary::-webkit-details-marker { display: none; }
+details.acc > summary h2 { margin: 0; }
+details.acc > summary .label { display: block; padding-top: 0; }
+details.acc > summary:hover h2 { color: var(--industry); }
+.tog::before { content: "+"; font: 400 30px/1 var(--mono); color: var(--industry); }
+details[open] > summary .tog::before { content: "\2013"; }
+.acc-body { display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 0 0 36px; }
+.acc-body > div { grid-column: 2; min-width: 0; }
+@media (max-width: 860px) {
+  details.acc > summary { grid-template-columns: 1fr 32px; gap: 12px; }
+  details.acc > summary .label { grid-column: 1 / -1; }
+  .acc-body { grid-template-columns: 1fr; }
+  .acc-body > div { grid-column: 1; }
+}
+
+
+/* reference s fotografijami */
+.refs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 28px 20px; margin-top: 8px; }
+.ref { display: grid; gap: 4px; align-content: start; }
+.ref figure img, .ref .ph { aspect-ratio: 4/3; object-fit: cover; }
+.ref figcaption { font-size: 10px; line-height: 1.4; margin-top: 4px; }
+.ref figcaption a { color: var(--muted); }
+.ref h3 { font-size: 17px; margin: 8px 0 0; }
+.ref h3 a { color: var(--ink); text-decoration: none; }
+.ref h3 a:hover { color: var(--industry); }
+.ref dl { margin: 6px 0 0; display: grid; gap: 2px; font-size: 14px; }
+.ref dt { font: 500 10px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-top: 4px; }
+.ref dd { margin: 0; }
+
+
+/* primeri in statistike */
+.cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+.case h4 { font: 700 17px/1.2 var(--display); margin: 0 0 2px; }
+.case .meta { margin: 0 0 10px; }
+.case .cnote { font-size: 14px; margin: 10px 0 12px; }
+.ybars { display: grid; gap: 4px; }
+.yb { display: grid; grid-template-columns: 36px 1fr 64px; gap: 8px; align-items: center; font: 400 12px/1 var(--mono); font-variant-numeric: tabular-nums; }
+.yb .bar { height: 10px; background: #f2eef3; }
+.yb .bar i { display: block; height: 100%; background: var(--industry); }
+.yb .yv { text-align: right; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 20px; }
+.kpi { border-top: 3px solid var(--industry); padding-top: 10px; display: grid; gap: 4px; font-size: 13px; }
+.kpi .k { font: 500 11px/1.3 var(--mono); text-transform: uppercase; color: var(--muted); letter-spacing: .05em; }
+.kpi b { font: 800 26px/1 var(--display); font-variant-numeric: tabular-nums; }
+ol.flow { list-style: none; padding: 0; margin: 10px 0 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+ol.flow li { border: 1px solid var(--context); padding: 10px; font-size: 13px; display: grid; gap: 6px; align-content: start; }
+ol.flow b { font: 800 20px/1 var(--display); color: var(--industry); }
+
+
+/* slike oddaj in povečava */
+figure.zoomable img { cursor: zoom-in; }
+.case-figs { display: grid; gap: 10px; }
+figure.wide img { width: 100%; }
+.lb { position: fixed; inset: 0; background: rgba(20,16,22,.92); display: none; align-items: center; justify-content: center; z-index: 100; padding: 24px; cursor: zoom-out; }
+.lb.on { display: flex; }
+.lb img { max-width: 100%; max-height: 100%; border: 0; background: #fff; }
+.lb p { position: absolute; bottom: 10px; left: 24px; right: 24px; color: #eee; font: 400 13px/1.4 var(--mono); margin: 0; }
+
+
+/* statistika: sredinska poravnava */
+table.stats th, table.stats td { text-align: center; }
+table.stats th:first-child, table.stats td:first-child { text-align: left; }
+/* 1.4: primeri študentke v vodoravnem traku */
+#v-vaja-1 .student { grid-template-columns: 1fr; gap: 12px; }
+#v-vaja-1 .student .who { display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap; }
+.strip-wrap { position: relative; }
+.cases { display: flex; gap: 28px; overflow-x: auto; scroll-snap-type: x proximity; padding: 4px 2px 16px; scrollbar-width: thin; }
+.case { flex: none; display: flex; gap: 14px; align-items: flex-start; scroll-snap-align: start; }
+.case .cinfo { flex: none; width: 250px; }
+.case-figs { display: flex; gap: 12px; }
+.case-figs figure { flex: none; }
+.case-figs figure img { height: 440px; width: auto; max-width: none; }
+.case > .ph { width: 320px; flex: none; }
+.strip-nav { display: flex; gap: 6px; justify-content: flex-end; margin-top: -4px; }
+.strip-nav button { font: 500 14px/1 var(--mono); width: 34px; height: 30px; border: 1px solid var(--context); background: var(--paper); color: var(--ink); cursor: pointer; }
+.strip-nav button:hover { border-color: var(--ink); }
+@media (max-width: 600px) { .case-figs figure img { height: 300px; } .case .cinfo { width: 200px; } }
+
+
+/* 1.4 primerjalna matrika */
+.cmp-tools { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0 10px; }
+.cmp-tools button { font: 500 12px/1 var(--mono); padding: 7px 10px; border: 1px solid var(--context); background: var(--paper); color: var(--ink); cursor: pointer; }
+.cmp-tools button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.cmp-nav { margin-left: auto; display: flex; gap: 6px; }
+.cmp-wrap { overflow-x: auto; border-top: 2px solid var(--ink); scrollbar-width: thin; }
+table.cmp { border-collapse: separate; border-spacing: 0; min-width: 0; width: max-content; }
+table.cmp th, table.cmp td { vertical-align: top; padding: 10px 10px 10px 0; border-bottom: 1px solid var(--context); text-align: left; }
+table.cmp thead th { font: 500 11px/1.3 var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); padding-top: 10px; padding-bottom: 8px; }
+table.cmp thead th.case-h { color: var(--industry); border-bottom: 1px solid var(--industry); }
+table.cmp .stu { position: sticky; left: 0; z-index: 2; background: var(--paper); width: 120px; min-width: 120px; padding-right: 16px; box-shadow: 1px 0 0 var(--context); }
+table.cmp .stu b { display: block; font: 700 18px/1.2 var(--display); }
+table.cmp .stu .meta { display: block; font-size: 11px; margin-top: 4px; text-transform: none; letter-spacing: 0; }
+table.cmp td.t-info { width: 170px; min-width: 170px; font-size: 13px; }
+table.cmp td.t-k, table.cmp td.t-b { width: 150px; min-width: 150px; }
+table.cmp td.t-d { width: 260px; min-width: 260px; }
+table.cmp td.t-info h4 { font: 700 15px/1.2 var(--display); margin: 0 0 2px; }
+table.cmp td.t-info .meta { margin: 0 0 8px; }
+table.cmp td.t-info .cnote { font-size: 12px; line-height: 1.4; margin: 6px 0 0; }
+table.cmp td.t-info .meta { font-size: 11px; }
+table.cmp .yb { grid-template-columns: 30px 1fr 52px; font-size: 10px; }
+table.cmp .yb .bar { height: 7px; }
+table.cmp figure img { width: 100%; height: 200px; object-fit: contain; background: #fff; }
+table.cmp td.t-d figure img { height: 200px; }
+.cell-ph { height: 200px; aspect-ratio: auto; align-items: center; justify-content: center; }
+table.cmp td.t-info .cell-ph { height: 80px; }
+table.cmp[data-f="k"] .t-info, table.cmp[data-f="k"] .t-b, table.cmp[data-f="k"] .t-d,
+table.cmp[data-f="b"] .t-info, table.cmp[data-f="b"] .t-k, table.cmp[data-f="b"] .t-d,
+table.cmp[data-f="d"] .t-info, table.cmp[data-f="d"] .t-k, table.cmp[data-f="d"] .t-b { display: none; }
+
+
+footer { max-width: 1180px; margin: 0 auto; padding: 24px; border-top: 1px solid var(--ink); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font: 400 12px/1.5 var(--mono); color: var(--muted); }
+
+@media (max-width: 860px) {
+  .hero, section.blk, .student, .ex-cards { grid-template-columns: 1fr; gap: 16px; }
+  .phase { grid-template-columns: 1fr; gap: 6px; }
+  .grid3 { grid-template-columns: 1fr 1fr; }
+  .case-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .top-inner, main, footer { padding-left: 16px; padding-right: 16px; }
+  .grid3, .grid2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-lang="sl">
+
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="#uvod"><b>Odzivni</b> teritoriji</a>
+    <nav class="views" aria-label="Pogledi">
+      <a href="#uvod" data-view="uvod"><span class="sl">Studio</span><span class="en">Studio</span></a>
+      <a href="#vaja-1" data-view="vaja-1"><span class="sl">Vaja 1 · HubCities</span><span class="en">Exercise 1 · HubCities</span></a>
+      <a href="#vaja-2" data-view="vaja-2"><span class="sl">Vaja 2 · Ljubljana</span><span class="en">Exercise 2 · Ljubljana</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Jezik / Language">
+      <button type="button" id="btn-sl" data-set="sl" aria-pressed="true">SL</button>
+      <button type="button" id="btn-en" data-set="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ UVOD ============ -->
+<div class="view" id="v-uvod">
+  <div class="hero">
+    <div>
+      <p class="meta">UL FA · <span class="sl">Katedra za urbanizem</span><span class="en">Department of Urbanism</span> · 2026/27</p>
+      <h1>Odzivni teritoriji <span class="sub">Responsive Territories</span></h1>
+      <p class="lede" style="margin-top:24px">
+        <span class="sl">Urbanistični studio, ki industrijska območja ob letališčih, pristaniščih in večjih železniških vozliščih bere kot del mesta. Letos poteka v okviru projekta HubCities: najprej razvijemo metodo na evropskem merilu, nato jo prenesemo na ljubljanski obroč in v njem umestimo novo rabo.</span>
+        <span class="en">An urban design studio that reads industrial land around airports, seaports and major rail hubs as part of the city. This year it runs within the HubCities project: we first develop a method at European scale, then transfer it to the Ljubljana ring and place a new use there.</span>
+      </p>
+      <div class="ramp" aria-hidden="true"><span style="background:var(--context)"></span><span style="background:var(--p0)"></span><span style="background:var(--p1)"></span><span style="background:var(--p2)"></span><span style="background:var(--p3)"></span></div>
+    </div>
+    <dl class="facts">
+      <dt><span class="sl">Mentor</span><span class="en">Tutor</span></dt><dd>doc. dr. Tomaž Berčič</dd>
+      <dt><span class="sl">Študentke</span><span class="en">Students</span></dt><dd>Anastasija Ristova, Eleonora Lazarova, Natalia Puzyrkova, Jovana Isailović</dd>
+      <dt><span class="sl">Okvir</span><span class="en">Framework</span></dt><dd>HubCities (Horizon Europe, MSCA, 101108858)</dd>
+      <dt><span class="sl">Korekture</span><span class="en">Reviews</span></dt><dd><span class="sl">torek in petek dopoldne</span><span class="en">Tuesday and Friday mornings</span></dd>
+      <dt><span class="sl">Orodja</span><span class="en">Tools</span></dt><dd>ArcGIS Pro, CORINE Land Cover, NUTS</dd>
+      <dt><span class="sl">Najava</span><span class="en">Course page</span></dt><dd><a href="https://www.fa.uni-lj.si/seminar/bercic/">fa.uni-lj.si/seminar/bercic</a></dd>
+    </dl>
+  </div>
+
+  <section class="blk">
+    <div class="label"><span class="no">01</span><span class="sl">Dve vaji</span><span class="en">Two exercises</span></div>
+    <div>
+      <h2><span class="sl">Od skupne metode do lastnega projekta</span><span class="en">From a shared method to an individual project</span></h2>
+      <div class="ex-cards">
+        <article class="ex-card">
+          <span class="kind"><span class="sl">Vaja 1 · skupna · okt–nov 2026</span><span class="en">Exercise 1 · joint · Oct–Nov 2026</span></span>
+          <h3>HubCities v Evropi</h3>
+          <p><span class="sl">Skupaj razvijemo metodo, kako na podlagi jasnih kriterijev izbrati posebna industrijska območja ob vozliščih. Rezultat so karte v evropskem merilu, statistike za celotno območje in po trije primeri časovne analize na študentko.</span><span class="en">Together we develop a method for selecting special industrial areas around hubs from explicit criteria. The result is a set of European-scale maps, statistics for the whole area and three temporal case analyses per student.</span></p>
+          <a class="btn" href="#vaja-1"><span class="sl">Odpri vajo 1</span><span class="en">Open exercise 1</span></a>
+        </article>
+        <article class="ex-card two">
+          <span class="kind"><span class="sl">Vaja 2 · individualna · nov 2026 –</span><span class="en">Exercise 2 · individual · Nov 2026 –</span></span>
+          <h3><span class="sl">Ljubljana in nove rabe</span><span class="en">Ljubljana and new uses</span></h3>
+          <p><span class="sl">Vsaka študentka izbere prihodnosti relevantno rabo, jo dimenzionira in umesti v industrijsko okolje ob ljubljanskem obroču, tako da se tehnična stavba mehko preplete z mestom.</span><span class="en">Each student picks a future-relevant use, dimensions it and places it in an industrial setting along the Ljubljana ring, so that the technical building softly interweaves with the city.</span></p>
+          <a class="btn" href="#vaja-2"><span class="sl">Odpri vajo 2</span><span class="en">Open exercise 2</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="label"><span class="no">02</span><span class="sl">Časovnica</span><span class="en">Timeline</span></div>
+    <div>
+      <ol class="phases">
+        <li class="phase"><span class="when">6.–9. 10.</span><div><h3><span class="sl">Izhodišča in priprava podatkov</span><span class="en">Groundwork and data</span></h3><p><span class="sl">Branje članka HubCities in članka o operacionalizaciji, geodatabaza, razdelitev Evrope na štiri dele po NUTS 1, namestitev ArcGIS.</span><span class="en">Reading the HubCities and operationalisation papers, geodatabase, splitting Europe into four parts by NUTS 1, ArcGIS installation.</span></p></div><span class="chip done"><span class="sl">opravljeno</span><span class="en">done</span></span></li>
+        <li class="phase"><span class="when">9.–20. 10.</span><div><h3><span class="sl">HubCities in SuperHubCities</span><span class="en">HubCities and SuperHubCities</span></h3><p><span class="sl">Izločanje območij v svojem delu Evrope in prva časovna progresija.</span><span class="en">Extracting areas in each part of Europe and a first temporal progression.</span></p></div><span class="chip done"><span class="sl">opravljeno</span><span class="en">done</span></span></li>
+        <li class="phase"><span class="when">20. 10. – 10. 11.</span><div><h3><span class="sl">Trije tipični primeri in Oddaja 1</span><span class="en">Three typical cases and Submission 1</span></h3><p><span class="sl">Deleži pozidanosti, izbor primerov, listi B in D, skupne evropske karte in statistike.</span><span class="en">Built-up shares, case selection, sheets B and D, joint European maps and statistics.</span></p></div><span class="chip now"><span class="sl">v pregledu</span><span class="en">in review</span></span></li>
+        <li class="phase"><span class="when">20. 10. – nov</span><div><h3><span class="sl">Izbira nove rabe</span><span class="en">Choosing a new use</span></h3><p><span class="sl">Tema, prostorske zahteve, dodana javna raba, referenčni primer.</span><span class="en">Topic, spatial needs, added public use, reference project.</span></p></div><span class="chip now"><span class="sl">v teku</span><span class="en">in progress</span></span></li>
+        <li class="phase"><span class="when"><span class="sl">dec – jan</span><span class="en">Dec – Jan</span></span><div><h3><span class="sl">Ljubljanski obroč</span><span class="en">The Ljubljana ring</span></h3><p><span class="sl">Prenos metode na obroč, izbor lokacije, kazalniki in volumenska zasnova.</span><span class="en">Transferring the method to the ring, site selection, indicators and massing.</span></p></div><span class="chip next"><span class="sl">sledi</span><span class="en">next</span></span></li>
+        <li class="phase"><span class="when"><span class="sl">poletni semester</span><span class="en">spring semester</span></span><div><h3><span class="sl">Predstavitev</span><span class="en">Presentation</span></h3><p><span class="sl">3D karte, animacije časovnih slojev, plakati in končna predstavitev.</span><span class="en">3D maps, animated time layers, posters and the final presentation.</span></p></div><span class="chip next"><span class="sl">sledi</span><span class="en">next</span></span></li>
+      </ol>
+      <div class="cols">
+        <div class="note"><h3><span class="sl">Dnevnik dela</span><span class="en">Work log</span></h3><p><span class="sl">Na vsako korekturo natisnjen list A4 na skupni predlogi: skice, karte, posnetki zaslona, izpiski iz branja. Ob koncu leta iz njih nastane pregled procesa.</span><span class="en">A printed A4 sheet on the shared template for every review: sketches, maps, screenshots, reading notes. At the end of the year they form a process overview.</span></p></div>
+        <div class="note"><h3><span class="sl">UI in GIS</span><span class="en">AI and GIS</span></h3><p><span class="sl">Umetna inteligenca je dovoljena, vsaka oddaja pa mora vsebovati sloje GIS, iz katerih je rezultat mogoče preveriti.</span><span class="en">AI is allowed, but every submission must include the GIS layers that make the result verifiable.</span></p></div>
+        <div class="note"><h3><span class="sl">Dvojezičnost</span><span class="en">Bilingual</span></h3><p><span class="sl">Navodila in izdelki so v slovenščini in angleščini.</span><span class="en">Briefs and outputs are in Slovenian and English.</span></p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ VAJA 1 ============ -->
+<div class="view" id="v-vaja-1" hidden>
+  <div class="hero">
+    <div>
+      <p class="meta"><span class="sl">Vaja 1 · skupna · oktober–november 2026</span><span class="en">Exercise 1 · joint · October–November 2026</span></p>
+      <h1>HubCities <span class="sub"><span class="sl">v Evropi</span><span class="en">across Europe</span></span></h1>
+      <p class="lede" style="margin-top:24px"><span class="sl">Kako na podlagi kriterijev izbrati posebna industrijska območja ob vozliščih? Poudarek vaje je na metodi; rezultati so karte v evropskem merilu, statistike za celotno območje in primeri časovne analize, po trije na študentko.</span><span class="en">How can special industrial areas around hubs be selected from explicit criteria? The exercise focuses on method; the results are European-scale maps, statistics for the whole area and temporal case analyses, three per student.</span></p>
+    </div>
+    <dl class="facts">
+      <dt><span class="sl">Izhodišče</span><span class="en">Basis</span></dt><dd>Pansinger &amp; Ažman Momirski (2022), <a href="https://repository.corp.at/910/">REAL CORP 2022</a></dd>
+      <dt><span class="sl">Podatki</span><span class="en">Data</span></dt><dd>CLC 2000–2018, CLC Change, NUTS</dd>
+      <dt><span class="sl">Projekcija</span><span class="en">Projection</span></dt><dd>EPSG:3035, ha</dd>
+          </dl>
+  </div>
+
+  <div class="acc-tools"><button type="button" id="acc-open"><span class="sl">Odpri vse</span><span class="en">Expand all</span></button><button type="button" id="acc-close"><span class="sl">Zapri vse</span><span class="en">Collapse all</span></button></div>
+  <details class="acc" open>
+    <summary><span class="label"><span class="no">1.1</span><span class="sl">Metoda</span><span class="en">Method</span></span><h2><span class="sl">Od sloja CLC do vozlišča</span><span class="en">From the CLC layer to a hub</span></h2><span class="tog" aria-hidden="true"></span></summary>
+    <div class="acc-body"><div>
+      <ol class="steps">
+        <li><div><h3><span class="sl">Samo razred 121</span><span class="en">Class 121 only</span></h3><p><span class="sl">Delamo izključno na industrijskih in poslovnih enotah (CLC 121), ne na celotnem sloju rabe tal. Leto 1990 izpustimo, ker ne pokriva vseh držav.</span><span class="en">We work only with industrial or commercial units (CLC 121), not the full land-cover layer. 1990 is left out because it does not cover all countries.</span></p></div></li>
+        <li><div><h3><span class="sl">Štirje deli Evrope</span><span class="en">Four parts of Europe</span></h3><p><span class="sl">Evropa je razdeljena po regijah NUTS 1; vsaka študentka obdela svoj del po isti metodi.</span><span class="en">Europe is split by NUTS 1 regions; each student processes her part with the same method.</span></p></div></li>
+        <li><div><h3><span class="sl">Vplivni pas 5 km</span><span class="en">5 km buffer</span></h3><p><span class="sl">Pas je narisan okoli poligona letališča oziroma pristanišča, ne okoli središčne točke. Znotraj pasov izberemo površine 121; tako nastane HubCity.</span><span class="en">The buffer is drawn around the airport or port polygon, not a centre point. Class 121 inside the buffers forms a HubCity.</span></p></div></li>
+        <li><div><h3>SuperHubCity</h3><p><span class="sl">Kjer se pasovi dveh ali več tipov vozlišč prekrivajo, nastane SuperHubCity. Tip zapišemo s kombinacijo: LP, LŽ, PŽ, LPŽ (letališče, pristanišče, železnica).</span><span class="en">Where buffers of two or more hub types overlap, a SuperHubCity emerges. Its type records the combination: AP, AR, PR, APR (airport, port, rail).</span></p></div></li>
+        <li><div><h3><span class="sl">Delež pozidanosti</span><span class="en">Built-up share</span></h3><p><span class="sl"><code>delež = površina 121 v območju / površina območja × 100</code>, za CLC 2018. Rezultat je tabela z imenom, tipom, površino območja, površino 121 in deležem.</span><span class="en"><code>share = area of 121 in the area / area × 100</code>, for CLC 2018. The result is a table with name, type, area, 121 area and share.</span></p></div></li>
+        <li><div><h3><span class="sl">Trije tipični primeri</span><span class="en">Three typical cases</span></h3><p><span class="sl">Območja razvrstimo po deležu in izberemo visok, srednji in nizek primer (orientacijsko 20, 10 in 5 %), z utemeljitvijo, zakaj niso izjeme.</span><span class="en">Areas are ranked by share and a high, medium and low case is chosen (roughly 20, 10 and 5 %), with a note on why they are typical rather than outliers.</span></p></div></li>
+        <li><div><h3><span class="sl">Progresija iz slojev sprememb</span><span class="en">Progression from change layers</span></h3><p><span class="sl">Rast 121 po obdobjih 2000–2006, 2006–2012 in 2012–2018 iz slojev CLC Change, ne z odštevanjem statusnih slojev, ki daje šum ob robovih poligonov. Za vsako obdobje nove površine v ha in rastni indeks glede na 2000; sloj <code>prog</code> s poljem <code>obd</code> 0–3.</span><span class="en">Growth of 121 for 2000–2006, 2006–2012 and 2012–2018 from the CLC Change layers, not by subtracting status layers, which creates noise along polygon edges. For each period new area in ha and a growth index relative to 2000; a <code>prog</code> layer with field <code>obd</code> 0–3.</span></p></div></li>
+        <li><div><h3><span class="sl">Enotna predstavitev</span><span class="en">Shared presentation</span></h3><p><span class="sl">Vse karte izhajajo iz paketa <code>hubcities_reduced.ppkx</code>: industrija #A80084, pas letališča rumen, pas pristanišča moder, obdobja v magenta lestvici. Navodila so v receptu SLO/ENG (2. 11. 2026).</span><span class="en">All maps start from the <code>hubcities_reduced.ppkx</code> package: industry #A80084, airport buffer yellow, port buffer blue, periods in a magenta ramp. Steps are in the SLO/ENG recipe (2 Nov 2026).</span></p></div></li>
+      </ol>
+            <h3 style="margin-top:28px"><span class="sl">Potek dela skupine</span><span class="en">The group's workflow</span></h3>
+      <ol class="flow">
+        <li><b>1</b><span class="sl">podatki: CLC 121, 123, 124; NUTS 2</span><span class="en">data: CLC 121, 123, 124; NUTS 2</span></li>
+        <li><b>2</b><span class="sl">5 km pasovi okoli letališč in pristanišč (Buffer)</span><span class="en">5 km buffers around airports and ports (Buffer)</span></li>
+        <li><b>3</b><span class="sl">HubCities: industrija, obrezana s pasovi (Clip)</span><span class="en">HubCities: industry clipped to buffers (Clip)</span></li>
+        <li><b>4</b><span class="sl">SuperHubCities: presek pasov (Intersect, Clip), prag 10 ha</span><span class="en">SuperHubCities: buffer overlap (Intersect, Clip), 10 ha threshold</span></li>
+        <li><b>5</b><span class="sl">razvoj: korak 4 za vsako leto 2000–2018</span><span class="en">change: step 4 for every year 2000–2018</span></li>
+        <li><b>6</b><span class="sl">prikaz: karte in 3D, višina kot rast</span><span class="en">display: maps and 3D, height as growth</span></li>
+      </ol>
+      <div class="grid3" style="margin-top:8px">
+        <figure class="zoomable "><img src="img/v1/sk_metoda_potek.jpg" alt="Metodologija: potek v šestih korakih" loading="lazy"><figcaption><span class="sl">Metodologija: potek v šestih korakih</span><span class="en">Methodology: six-step workflow</span></figcaption></figure>
+        <figure class="zoomable "><img src="img/v1/sk_metoda_bufferji.jpg" alt="Primer Riga: letališča, pristanišča in 5 km pasovi" loading="lazy"><figcaption><span class="sl">Primer Riga: letališča, pristanišča in 5 km pasovi</span><span class="en">Riga example: airports, ports and 5 km buffers</span></figcaption></figure>
+        <figure class="zoomable "><img src="img/v1/sk_metoda_industrija.jpg" alt="Primer Riga: industrija 2018" loading="lazy"><figcaption><span class="sl">Primer Riga: industrija 2018</span><span class="en">Riga example: industry 2018</span></figcaption></figure>
+        <figure class="zoomable "><img src="img/v1/sk_metoda_hubcities.jpg" alt="Primer Riga: Airport in Port HubCities" loading="lazy"><figcaption><span class="sl">Primer Riga: Airport in Port HubCities</span><span class="en">Riga example: Airport and Port HubCities</span></figcaption></figure>
+        <figure class="zoomable "><img src="img/v1/sk_metoda_superhub.jpg" alt="Primer Riga: SuperHubCities in delež industrije" loading="lazy"><figcaption><span class="sl">Primer Riga: SuperHubCities in delež industrije</span><span class="en">Riga example: SuperHubCities and industry share</span></figcaption></figure>
+        <figure class="zoomable "><img src="img/v1/sk_3d_riga.jpg" alt="Primer Riga: razvoj 2000–2018 v 3D" loading="lazy"><figcaption><span class="sl">Primer Riga: razvoj 2000–2018 v 3D</span><span class="en">Riga example: change 2000–2018 in 3D</span></figcaption></figure>
+      </div>
+
+      <ul class="legend" aria-label="Legenda">
+        <li><span class="sw" style="background:var(--industry)"></span><span class="sl">industrija 121 · SuperHubCity</span><span class="en">industry 121 · SuperHubCity</span></li>
+        <li><span class="sw" style="background:var(--existing)"></span>HubCity</li>
+        <li><span class="sw" style="background:var(--airport);opacity:.6"></span><span class="sl">pas letališča</span><span class="en">airport buffer</span></li>
+        <li><span class="sw" style="background:var(--port);opacity:.6"></span><span class="sl">pas pristanišča</span><span class="en">port buffer</span></li>
+        <li><span class="sw" style="background:var(--p0)"></span><span class="sw" style="background:var(--p1)"></span><span class="sw" style="background:var(--p2)"></span><span class="sw" style="background:var(--p3)"></span><span class="sl">obdobja 0–3</span><span class="en">periods 0–3</span></li>
+      </ul>
+      <div class="grid2" style="margin-top:28px">
+        <figure><img src="img/vzorec_B.jpg" alt="Vzorčni list B: štirje sloji CLC drug nad drugim okoli letališča" loading="lazy"><figcaption><span class="sl">Vzorec lista B: progresija v slojih</span><span class="en">Sample sheet B: progression in layers</span></figcaption></figure>
+        <figure><img src="img/vzorec_D.jpg" alt="Vzorčni list D: industrija 2018, višina po obdobju nastanka" loading="lazy"><figcaption><span class="sl">Vzorec lista D: čas kot višina</span><span class="en">Sample sheet D: time as height</span></figcaption></figure>
+      </div>
+    </div></div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="label"><span class="no">1.2</span><span class="sl">Evropske karte</span><span class="en">European maps</span></span><h2><span class="sl">Vozlišča in regije</span><span class="en">Hubs and regions</span></h2><span class="tog" aria-hidden="true"></span></summary>
+    <div class="acc-body"><div>
+      <p><span class="sl">Skupne karte za Evropo v merilu 1 : 2.000.000 in časovna serija po regijah NUTS 2 (2000, 2006, 2012, 2018).</span><span class="en">Joint maps of Europe at 1:2,000,000 and a time series by NUTS 2 region (2000, 2006, 2012, 2018).</span></p>
+      <div class="grid2">
+        <figure class="zoomable "><img src="img/v1/sk_eu1.jpg" alt="EU-1 · HubCities in SuperHubCities v Evropi, velikost po industriji 2018" loading="lazy"><figcaption><span class="sl">EU-1 · HubCities in SuperHubCities v Evropi, velikost po industriji 2018</span><span class="en">EU-1 · HubCities and SuperHubCities in Europe, sized by 2018 industry</span></figcaption></figure>
+        <figure class="zoomable "><img src="img/v1/sk_eu2.jpg" alt="EU-2 · industrija v vozliščih po regijah NUTS 2" loading="lazy"><figcaption><span class="sl">EU-2 · industrija v vozliščih po regijah NUTS 2</span><span class="en">EU-2 · hub industry by NUTS 2 region</span></figcaption></figure>
+        <figure class="zoomable "><img src="img/v1/sk_airport_2018.jpg" alt="Letališka vozlišča 2018" loading="lazy"><figcaption><span class="sl">Letališka vozlišča 2018</span><span class="en">Airport hubs 2018</span></figcaption></figure>
+        <figure class="zoomable "><img src="img/v1/sk_port_2018.jpg" alt="Pristaniška vozlišča 2018" loading="lazy"><figcaption><span class="sl">Pristaniška vozlišča 2018</span><span class="en">Port hubs 2018</span></figcaption></figure>
+        <figure class="zoomable "><img src="img/v1/sk_superhub_2018.jpg" alt="SuperHubCities 2018" loading="lazy"><figcaption><span class="sl">SuperHubCities 2018</span><span class="en">SuperHubCities 2018</span></figcaption></figure>
+      </div>
+      <div style="margin-top:16px"><figure class="zoomable wide"><img src="img/v1/sk_eu2_leta.jpg" alt="Število HubCities po regijah NUTS 2: 2000, 2006, 2012, 2018" loading="lazy"><figcaption><span class="sl">Število HubCities po regijah NUTS 2: 2000, 2006, 2012, 2018</span><span class="en">HubCities per NUTS 2 region: 2000, 2006, 2012, 2018</span></figcaption></figure></div>
+    </div></div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="label"><span class="no">1.3</span><span class="sl">Statistike</span><span class="en">Statistics</span></span><h2><span class="sl">Evropa v številkah</span><span class="en">Europe in numbers</span></h2><span class="tog" aria-hidden="true"></span></summary>
+    <div class="acc-body"><div>
+      <p><span class="sl">Statistike za celotno Evropo iz skupnega dela (CLC 2018). HubCity zajema industrijo v 5 km pasu letališča ali pristanišča, SuperHubCity industrijo v preseku obeh pasov.</span><span class="en">Statistics for the whole of Europe from the joint part (CLC 2018). A HubCity covers industry within 5 km of an airport or port, a SuperHubCity industry inside the overlap of both buffers.</span></p>
+      <div class="table-wrap">
+        <table class="stats">
+          <thead><tr><th><span class="sl">Kazalnik</span><span class="en">Indicator</span></th><th class="n">Airport HubCity</th><th class="n">Port HubCity</th><th class="n">SuperHubCity</th></tr></thead>
+          <tbody>
+            <tr><td><span class="sl">Število območij</span><span class="en">Number of areas</span></td><td class="n">1.418</td><td class="n">853</td><td class="n">396</td></tr>
+            <tr><td><span class="sl">Povprečna površina (ha)</span><span class="en">Mean area (ha)</span></td><td class="n">1.026,45</td><td class="n">907,42</td><td class="n">1.667,39</td></tr>
+            <tr><td><span class="sl">Mediana (ha)</span><span class="en">Median (ha)</span></td><td class="n">982,56</td><td class="n">900,63</td><td class="n">641,13</td></tr>
+            <tr><td><span class="sl">Najmanjša (ha)</span><span class="en">Minimum (ha)</span></td><td class="n">207,25</td><td class="n">42,65</td><td class="n">2,35</td></tr>
+            <tr><td><span class="sl">Največja (ha)</span><span class="en">Maximum (ha)</span></td><td class="n">3.632,09</td><td class="n">3.962,01</td><td class="n">12.738,52</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:14px"><span class="sl">Pri letaliških in pristaniških vozliščih sta povprečje in mediana skoraj enaka, kar kaže na enakomerno porazdelitev. Pri SuperHubCity je povprečje skoraj trikrat večje od mediane: večina območij je majhnih, nekaj zelo velikih pa dvigne povprečje.</span><span class="en">For airport and port hubs the mean and median are almost equal, which points to an even distribution. For SuperHubCities the mean is almost three times the median: most areas are small, and a few very large ones lift the average.</span></p>
+
+      <div class="kpis">
+        <div class="kpi"><span class="k">Pendik-Tuzla</span><b>12.738 ha</b><span><span class="sl">največji SuperHubCity · 12,8 % industrije</span><span class="en">largest SuperHubCity · 12.8% industry</span></span></div>
+        <div class="kpi"><span class="k">Vigo</span><b>538 ha</b><span><span class="sl">mediana · 5,4 % industrije</span><span class="en">median · 5.4% industry</span></span></div>
+        <div class="kpi"><span class="k">Basel-Mulhouse</span><b>5,8 ha</b><span><span class="sl">najmanjši z industrijo · 0,2 %</span><span class="en">smallest with industry · 0.2%</span></span></div>
+        <div class="kpi"><span class="k">Spearman ρ</span><b>0,241</b><span><span class="sl">površina : delež industrije, p &lt; 0,001, N = 396</span><span class="en">area vs industry share, p &lt; 0.001, N = 396</span></span></div>
+      </div>
+      <p style="margin-top:14px"><span class="sl">Večja območja imajo nekoliko večji delež industrije, vendar je povezava šibka.</span><span class="en">Larger areas tend to have a slightly higher industry share, but the relationship is weak.</span></p>
+      <div class="grid2" style="margin-top:20px"><figure class="zoomable "><img src="img/v1/sk_statistika_1.jpg" alt="Statistika: primerjava HubCity in delež industrije v izbranih SuperHubCity" loading="lazy"><figcaption><span class="sl">Statistika: primerjava HubCity in delež industrije v izbranih SuperHubCity</span><span class="en">Statistics: HubCity comparison and industry share in selected SuperHubCities</span></figcaption></figure><figure class="zoomable "><img src="img/v1/sk_statistika_2.jpg" alt="Statistika: povezanost površine in deleža ter časovna dinamika" loading="lazy"><figcaption><span class="sl">Statistika: povezanost površine in deleža ter časovna dinamika</span><span class="en">Statistics: area vs share and temporal dynamics</span></figcaption></figure></div>
+    </div></div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="label"><span class="no">1.4</span><span class="sl">Primeri</span><span class="en">Cases</span></span><h2><span class="sl">Trije primeri na študentko</span><span class="en">Three cases per student</span></h2><span class="tog" aria-hidden="true"></span></summary>
+    <div class="acc-body"><div>
+      <p><span class="sl">Vsaka študentka iz svojega dela Evrope izbere tri tipične SuperHubCity območja in prikaže razvoj razreda 121 med letoma 2000 in 2018. Enaki izdelki so poravnani v stolpcih, zato jih lahko primerjaš med študentkami; z gumbi zgoraj prikažeš samo eno vrsto lista.</span><span class="en">Each student picks three typical SuperHubCity areas from her part of Europe and shows how class 121 developed from 2000 to 2018. Like outputs are aligned in columns so they can be compared across students; the buttons show one sheet type at a time.</span></p>
+      <div class="cmp-tools" role="group" aria-label="Prikaz">
+      <span class="meta"><span class="sl">Primerjaj:</span><span class="en">Compare:</span></span>
+      <button type="button" class="cmp-f" data-f="all" aria-pressed="true"><span class="sl">vse</span><span class="en">all</span></button>
+      <button type="button" class="cmp-f" data-f="k" aria-pressed="false"><span class="sl">karte</span><span class="en">maps</span></button>
+      <button type="button" class="cmp-f" data-f="b" aria-pressed="false"><span class="sl">progresija B</span><span class="en">progression B</span></button>
+      <button type="button" class="cmp-f" data-f="d" aria-pressed="false"><span class="sl">čas kot višina D</span><span class="en">time as height D</span></button>
+      <span class="cmp-nav"><button type="button" class="cmp-s" data-dir="-1" aria-label="Nazaj">&larr;</button><button type="button" class="cmp-s" data-dir="1" aria-label="Naprej">&rarr;</button></span></div>
+      <div class="cmp-wrap"><table class="cmp" data-f="all">
+      <thead><tr><th class="stu" rowspan="2"></th><th class="case-h" colspan="4" data-case="1"><span class="sl">Primer 1</span><span class="en">Case 1</span></th><th class="case-h" colspan="4" data-case="2"><span class="sl">Primer 2</span><span class="en">Case 2</span></th><th class="case-h" colspan="4" data-case="3"><span class="sl">Primer 3</span><span class="en">Case 3</span></th></tr>
+      <tr><th class="t-info"><span class="sl">Opis in rast</span><span class="en">Summary and growth</span></th><th class="t-k"><span class="sl">Karta</span><span class="en">Map</span></th><th class="t-b"><span class="sl">Progresija (B)</span><span class="en">Progression (B)</span></th><th class="t-d"><span class="sl">Čas kot višina (D)</span><span class="en">Time as height (D)</span></th><th class="t-info"><span class="sl">Opis in rast</span><span class="en">Summary and growth</span></th><th class="t-k"><span class="sl">Karta</span><span class="en">Map</span></th><th class="t-b"><span class="sl">Progresija (B)</span><span class="en">Progression (B)</span></th><th class="t-d"><span class="sl">Čas kot višina (D)</span><span class="en">Time as height (D)</span></th><th class="t-info"><span class="sl">Opis in rast</span><span class="en">Summary and growth</span></th><th class="t-k"><span class="sl">Karta</span><span class="en">Map</span></th><th class="t-b"><span class="sl">Progresija (B)</span><span class="en">Progression (B)</span></th><th class="t-d"><span class="sl">Čas kot višina (D)</span><span class="en">Time as height (D)</span></th></tr></thead><tbody>
+      <tr><th class="stu" scope="row"><b>Anastasija</b><span class="meta"><span class="sl">Južna Evropa</span><span class="en">Southern Europe</span></span></th><td class="t-info"><h4>Bari</h4><p class="meta"><span class="sl">presek ob obali, vzhodno od letališča</span><span class="en">overlap on the coast east of the airport</span></p><div class="ybars"><div class="yb"><span class="yl">2000</span><span class="bar"><i style="width:52.7%"></i></span><span class="yv">1.338,7</span></div><div class="yb"><span class="yl">2006</span><span class="bar"><i style="width:59.0%"></i></span><span class="yv">1.499,9</span></div><div class="yb"><span class="yl">2012</span><span class="bar"><i style="width:100.0%"></i></span><span class="yv">2.540,9</span></div><div class="yb"><span class="yl">2018</span><span class="bar"><i style="width:100.0%"></i></span><span class="yv">2.540,9</span></div></div><p class="cnote"><span class="sl">Največja rast 2006–2012 (+1.041 ha), po letu 2012 brez novih površin.</span><span class="en">Largest growth 2006–2012 (+1,041 ha), no new land after 2012.</span></p></td><td class="t-k"><figure class="zoomable"><img src="img/v1/an_bari_karta.jpg" alt="karta" loading="lazy"></figure></td><td class="t-b"><figure class="zoomable"><img src="img/v1/an_bari_B.jpg" alt="B" loading="lazy"></figure></td><td class="t-d"><figure class="zoomable"><img src="img/v1/an_bari_D.jpg" alt="D" loading="lazy"></figure></td><td class="t-info"><h4><span class="sl">Atene</span><span class="en">Athens</span></h4><p class="meta"><span class="sl">dva preseka ob Saronskem zalivu</span><span class="en">two overlaps on the Saronic Gulf</span></p><div class="ybars"><div class="yb"><span class="yl">2000</span><span class="bar"><i style="width:63.4%"></i></span><span class="yv">4.542,9</span></div><div class="yb"><span class="yl">2006</span><span class="bar"><i style="width:87.3%"></i></span><span class="yv">6.255,1</span></div><div class="yb"><span class="yl">2012</span><span class="bar"><i style="width:100.0%"></i></span><span class="yv">7.165,1</span></div><div class="yb"><span class="yl">2018</span><span class="bar"><i style="width:100.0%"></i></span><span class="yv">7.165,1</span></div></div><p class="cnote"><span class="sl">Rast predvsem 2000–2006 (+1.712 ha).</span><span class="en">Growth mainly 2000–2006 (+1,712 ha).</span></p></td><td class="t-k"><figure class="zoomable"><img src="img/v1/an_atene_karta.jpg" alt="karta" loading="lazy"></figure></td><td class="t-b"><figure class="zoomable"><img src="img/v1/an_atene_B.jpg" alt="B" loading="lazy"></figure></td><td class="t-d"><figure class="zoomable"><img src="img/v1/an_atene_D.jpg" alt="D" loading="lazy"></figure></td><td class="t-info"><h4>Istanbul</h4><p class="meta"><span class="sl">dva preseka ob Marmarskem morju</span><span class="en">two overlaps on the Sea of Marmara</span></p><div class="ybars"><div class="yb"><span class="yl">2000</span><span class="bar"><i style="width:47.3%"></i></span><span class="yv">3.458,4</span></div><div class="yb"><span class="yl">2006</span><span class="bar"><i style="width:69.6%"></i></span><span class="yv">5.083,8</span></div><div class="yb"><span class="yl">2012</span><span class="bar"><i style="width:79.8%"></i></span><span class="yv">5.827,4</span></div><div class="yb"><span class="yl">2018</span><span class="bar"><i style="width:100.0%"></i></span><span class="yv">7.304,3</span></div></div><p class="cnote"><span class="sl">Edini primer z močno rastjo tudi po letu 2012 (+1.477 ha).</span><span class="en">The only case with strong growth after 2012 (+1,477 ha).</span></p></td><td class="t-k"><figure class="zoomable"><img src="img/v1/an_istanbul_karta.jpg" alt="karta" loading="lazy"></figure></td><td class="t-b"><figure class="zoomable"><img src="img/v1/an_istanbul_B.jpg" alt="B" loading="lazy"></figure></td><td class="t-d"><figure class="zoomable"><img src="img/v1/an_istanbul_D.jpg" alt="D" loading="lazy"></figure></td></tr>
+      <tr><th class="stu" scope="row"><b>Eleonora</b><span class="meta"><span class="sl">Baltik in Skandinavija</span><span class="en">Baltic and Scandinavia</span></span></th><td class="t-info"><h4>Helsinki</h4><p class="meta"><span class="sl">presek 1.952 ha · industrija 5,1 %</span><span class="en">overlap 1,952 ha · industry 5.1%</span></p><div class="ybars"><div class="yb"><span class="yl">2000</span><span class="bar"><i style="width:92.5%"></i></span><span class="yv">91,9</span></div><div class="yb"><span class="yl">2006</span><span class="bar"><i style="width:92.5%"></i></span><span class="yv">91,9</span></div><div class="yb"><span class="yl">2012</span><span class="bar"><i style="width:100.0%"></i></span><span class="yv">99,3</span></div><div class="yb"><span class="yl">2018</span><span class="bar"><i style="width:100.0%"></i></span><span class="yv">99,3</span></div></div><p class="cnote"><span class="sl">Ozka leča med pasovoma; večinoma morje in nepozidano.</span><span class="en">Narrow lens between the buffers; mostly sea and open land.</span></p></td><td class="t-k"><figure class="zoomable"><img src="img/v1/el_helsinki_karta.jpg" alt="karta" loading="lazy"></figure></td><td class="t-b"><figure class="zoomable"><img src="img/v1/el_helsinki_B.jpg" alt="B" loading="lazy"></figure></td><td class="t-d"><div class="ph cell-ph">–</div></td><td class="t-info"><h4>Tallinn</h4><p class="meta"><span class="sl">presek 5.674 ha · industrija 18,1 %</span><span class="en">overlap 5,674 ha · industry 18.1%</span></p><div class="ybars"><div class="yb"><span class="yl">2000</span><span class="bar"><i style="width:89.7%"></i></span><span class="yv">998,3</span></div><div class="yb"><span class="yl">2006</span><span class="bar"><i style="width:100.0%"></i></span><span class="yv">1.112,6</span></div><div class="yb"><span class="yl">2012</span><span class="bar"><i style="width:97.2%"></i></span><span class="yv">1.081,6</span></div><div class="yb"><span class="yl">2018</span><span class="bar"><i style="width:96.9%"></i></span><span class="yv">1.078,0</span></div></div><p class="cnote"><span class="sl">Industrija strnjena ob pristanišču.</span><span class="en">Industry clusters along the port.</span></p></td><td class="t-k"><figure class="zoomable"><img src="img/v1/el_tallinn_karta.jpg" alt="karta" loading="lazy"></figure></td><td class="t-b"><figure class="zoomable"><img src="img/v1/el_tallinn_B.jpg" alt="B" loading="lazy"></figure></td><td class="t-d"><div class="ph cell-ph">–</div></td><td class="t-info"><h4>Riga</h4><p class="meta"><span class="sl">presek 10.935 ha · industrija 15,0 %</span><span class="en">overlap 10,935 ha · industry 15.0%</span></p><div class="ybars"><div class="yb"><span class="yl">2000</span><span class="bar"><i style="width:100.0%"></i></span><span class="yv">2.538,1</span></div><div class="yb"><span class="yl">2006</span><span class="bar"><i style="width:81.4%"></i></span><span class="yv">2.065,2</span></div><div class="yb"><span class="yl">2012</span><span class="bar"><i style="width:80.7%"></i></span><span class="yv">2.048,4</span></div><div class="yb"><span class="yl">2018</span><span class="bar"><i style="width:80.7%"></i></span><span class="yv">2.048,4</span></div></div><p class="cnote"><span class="sl">Pas letališča se prekriva z dvema pasovoma pristanišč.</span><span class="en">The airport buffer overlaps two port buffers.</span></p></td><td class="t-k"><figure class="zoomable"><img src="img/v1/el_riga_karta.jpg" alt="karta" loading="lazy"></figure></td><td class="t-b"><figure class="zoomable"><img src="img/v1/el_riga_B.jpg" alt="B" loading="lazy"></figure></td><td class="t-d"><div class="ph cell-ph">–</div></td></tr>
+      <tr><th class="stu" scope="row"><b>Natalia</b><span class="meta"></span></th><td class="t-info"><div class="ph cell-ph"><span class="sl">v pripravi</span><span class="en">in preparation</span></div></td><td class="t-k"><div class="ph cell-ph">–</div></td><td class="t-b"><div class="ph cell-ph">–</div></td><td class="t-d"><div class="ph cell-ph">–</div></td><td class="t-info"><div class="ph cell-ph"><span class="sl">v pripravi</span><span class="en">in preparation</span></div></td><td class="t-k"><div class="ph cell-ph">–</div></td><td class="t-b"><div class="ph cell-ph">–</div></td><td class="t-d"><div class="ph cell-ph">–</div></td><td class="t-info"><div class="ph cell-ph"><span class="sl">v pripravi</span><span class="en">in preparation</span></div></td><td class="t-k"><div class="ph cell-ph">–</div></td><td class="t-b"><div class="ph cell-ph">–</div></td><td class="t-d"><div class="ph cell-ph">–</div></td></tr>
+      <tr><th class="stu" scope="row"><b>Jovana</b><span class="meta"></span></th><td class="t-info"><div class="ph cell-ph"><span class="sl">v pripravi</span><span class="en">in preparation</span></div></td><td class="t-k"><div class="ph cell-ph">–</div></td><td class="t-b"><div class="ph cell-ph">–</div></td><td class="t-d"><div class="ph cell-ph">–</div></td><td class="t-info"><div class="ph cell-ph"><span class="sl">v pripravi</span><span class="en">in preparation</span></div></td><td class="t-k"><div class="ph cell-ph">–</div></td><td class="t-b"><div class="ph cell-ph">–</div></td><td class="t-d"><div class="ph cell-ph">–</div></td><td class="t-info"><div class="ph cell-ph"><span class="sl">v pripravi</span><span class="en">in preparation</span></div></td><td class="t-k"><div class="ph cell-ph">–</div></td><td class="t-b"><div class="ph cell-ph">–</div></td><td class="t-d"><div class="ph cell-ph">–</div></td></tr>
+      </tbody></table></div>
+    </div></div>
+  </details>
+</div>
+
+<!-- ============ VAJA 2 ============ -->
+<div class="view" id="v-vaja-2" hidden>
+  <div class="hero">
+    <div>
+      <p class="meta"><span class="sl">Vaja 2 · individualna · od novembra 2026</span><span class="en">Exercise 2 · individual · from November 2026</span></p>
+      <h1><span class="sl">Ljubljana</span><span class="en">Ljubljana</span> <span class="sub"><span class="sl">in nove rabe</span><span class="en">and new uses</span></span></h1>
+      <p class="lede" style="margin-top:24px"><span class="sl">Metodo iz vaje 1 prenesemo na ljubljanski obroč, kjer ni letališča ne pristanišča, zato jih nadomestijo večji železniški objekti. Vsaka študentka izbere novo rabo za industrijsko okolje in jo dimenzionira.</span><span class="en">The method from exercise 1 is transferred to the Ljubljana ring, which has no airport or port, so larger rail facilities take their place. Each student chooses a new use for an industrial setting and dimensions it.</span></p>
+    </div>
+    <dl class="facts">
+      <dt><span class="sl">Ključno vprašanje</span><span class="en">Key question</span></dt><dd><span class="sl">Kako se tehnična stavba mehko preplete z mestom?</span><span class="en">How does a technical building softly interweave with the city?</span></dd>
+      <dt><span class="sl">Izdelki</span><span class="en">Outputs</span></dt><dd><span class="sl">lokacija, analiza, kazalniki, volumenska zasnova</span><span class="en">site, analysis, indicators, massing</span></dd>
+      <dt><span class="sl">Sodelovanje</span><span class="en">Collaboration</span></dt><dd><span class="sl">študenti TU Delft, tema ljubljanskega obroča</span><span class="en">TU Delft students, Ljubljana ring theme</span></dd>
+    </dl>
+  </div>
+
+  <section class="blk">
+    <div class="label"><span class="no">2.1</span><span class="sl">Teme</span><span class="en">Topics</span></div>
+    <div>
+      <h2><span class="sl">Štiri rabe za industrijski rob</span><span class="en">Four uses for the industrial edge</span></h2>
+      <p><span class="sl">Metodološki zgled je CopenHill v Københavnu: sežigalnica s smučiščem na strehi. Vsebinsko ne sodi v Ljubljano, pokaže pa, kako tehnična raba dobi javni program.</span><span class="en">The methodological model is CopenHill in Copenhagen: a waste-to-energy plant with a ski slope on its roof. It does not belong in Ljubljana, but it shows how a technical use gains a public programme.</span></p>
+
+      <article class="student" id="t-anastasija">
+        <div class="who"><h3>Anastasija</h3><div class="cat"><span class="sl">Podatki in digitalna infrastruktura</span><span class="en">Data &amp; digital infrastructure</span></div></div>
+        <div><h3><span class="sl">Ekološki podatkovni center</span><span class="en">Ecological data centre</span></h3></div>
+      </article>
+      <article class="student" id="t-eleonora">
+        <div class="who"><h3>Eleonora</h3><div class="cat"><span class="sl">Energija</span><span class="en">Energy</span></div></div>
+        <div><h3><span class="sl">Vodikarna: zeleni vodik z elektrolizo in rabo odpadne toplote</span><span class="en">Hydrogen plant: green hydrogen by electrolysis, using waste heat</span></h3><p><span class="sl">Izhodišče so ljubljanski avtobusi na vodik; možna je polnilnica za vlake ob železnici in zamenjava zemeljskega plina v delu industrije. Dodana javna raba: bazen, savna, rastlinjak, ogrevanje sosesk.</span><span class="en">Starting point: Ljubljana's hydrogen buses; a train refuelling station by the railway and replacing natural gas in parts of industry are possible. Added public use: pool, sauna, greenhouse, heating for neighbourhoods.</span></p></div>
+      </article>
+      <article class="student" id="t-natalia">
+        <div class="who"><h3>Natalia</h3><div class="cat"><span class="sl">Hrana in urbano kmetijstvo</span><span class="en">Food &amp; urban farming</span></div></div>
+        <div><h3><span class="sl">Vertikalna urbana kmetija s hidroponiko</span><span class="en">Vertical urban farm with hydroponics</span></h3><p><span class="sl">Nov objekt s tlorisom okoli 2.000–4.000 m². Javna raba: prodajalna, izobraževalni center, ogledi, skupnostni prostor. Sinergije: sončna elektrarna, deževnica, odvečna toplota sosednjih obratov. Referenca: La Cité Maraîchère, Romainville.</span><span class="en">A new building of roughly 2,000–4,000 m² footprint. Public use: shop, education centre, tours, community room. Synergies: rooftop solar, rainwater, waste heat from neighbouring plants. Reference: La Cité Maraîchère, Romainville.</span></p></div>
+      </article>
+      <article class="student" id="t-jovana">
+        <div class="who"><h3>Jovana</h3><div class="cat"><span class="sl">Hramba, arhivi, depoji</span><span class="en">Storage, archives, depots</span></div></div>
+        <div><h3><span class="sl">Sodobni mestni arhiv in center za digitalno ohranjanje</span><span class="en">Contemporary city archive and digital preservation centre</span></h3><p><span class="sl">Hramba fizične in digitalne dediščine z javnim dostopom: čitalnica, digitalne razstave, delavnice, raziskovalni prostori. Referenca: Noora, Estonski nacionalni arhiv, Tartu.</span><span class="en">Storage of physical and digital heritage with public access: reading room, digital exhibitions, workshops, research spaces. Reference: Noora, National Archives of Estonia, Tartu.</span></p></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="label"><span class="no">2.2</span><span class="sl">Lokacija</span><span class="en">Site</span></div>
+    <div>
+      <h2><span class="sl">Ljubljanski obroč</span><span class="en">The Ljubljana ring</span></h2>
+      <p><span class="sl">Do konca zimskega semestra: izbrana lokacija v obroču z analizo, kazalniki in volumensko zasnovo. Vsaka oddaja vsebuje sloje GIS.</span><span class="en">By the end of the winter semester: a chosen site within the ring with analysis, indicators and massing. Every submission includes GIS layers.</span></p>
+      <div class="grid3">
+        <figure><div class="ph"><span class="sl">analiza obroča</span><span class="en">ring analysis</span></div></figure>
+        <figure><div class="ph"><span class="sl">izbrane lokacije</span><span class="en">chosen sites</span></div></figure>
+        <figure><div class="ph"><span class="sl">volumenske zasnove</span><span class="en">massing studies</span></div></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="label"><span class="no">2.3</span><span class="sl">Reference</span><span class="en">References</span></div>
+    <div>
+      <h2><span class="sl">Tehnična raba z javnim programom</span><span class="en">Technical use with a public programme</span></h2>
+      <div class="refs">
+          <article class="ref">
+            <figure><img src="img/ref/copenhill.jpg" alt="CopenHill (BIG)" loading="lazy"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Amager_Bakke_Copenhagen_1.jpg">kallerna</a>, CC BY-SA 4.0</figcaption></figure>
+            <h3><a href="https://en.wikipedia.org/wiki/Amager_Bakke">CopenHill (BIG)</a></h3>
+            <p class="meta">København · 2017/2019</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">sežigalnica, toplota in elektrika</span><span class="en">waste-to-energy CHP</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">smučišče na strehi, plezalna stena</span><span class="en">rooftop ski slope, climbing wall</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/spittelau.jpg" alt="Spittelau" loading="lazy"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Hunderwasser_Fernheizwerk.JPG">Lukas Riebling</a>, CC BY-SA 3.0</figcaption></figure>
+            <h3><a href="https://hundertwasser.com/en/news/2022-12-02_0929000_30th_anniversary">Spittelau</a></h3>
+            <p class="meta">Wien · 1992</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">sežigalnica, daljinsko ogrevanje</span><span class="en">incineration, district heating</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">mestni simbol, prenova fasade</span><span class="en">landmark, facade redesign</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/energiebunker.jpg" alt="Energiebunker Wilhelmsburg" loading="lazy"><figcaption><span class="sl">notranjost, energetska oprema. </span><span class="en">interior, energy plant. </span><a href="https://commons.wikimedia.org/wiki/File:Energiebunker-Wilhelmsburg-397-0011-hinnerk-ruemenapf.jpg">Hinnerk Rümenapf (Hinnerk R)</a>, CC BY-SA 4.0</figcaption></figure>
+            <h3><a href="https://www.internationale-bauausstellungen.de/en/history/2006-2013-iba-hamburg-leap-across-the-elbe/energy-bunker-a-memorial-powers-the-district/">Energiebunker Wilhelmsburg</a></h3>
+            <p class="meta">Hamburg · 2013</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">hranilnik toplote v bunkerju</span><span class="en">heat storage in a bunker</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">kavarna, razgledna terasa</span><span class="en">café, viewing terrace</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><div class="ph">Deep Green, Exmouth · <span class="sl">fotografija sledi</span><span class="en">photo to follow</span></div><figcaption></figcaption></figure>
+            <h3><a href="https://www.ribaj.com/spec/devon-pool-demos-new-model-for-data-centre-cooling/">Deep Green, Exmouth</a></h3>
+            <p class="meta">Exmouth · 2023</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">majhen podatkovni center</span><span class="en">small data centre</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">toplota greje javni bazen</span><span class="en">heat warms a public pool</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/stockholm.jpg" alt="Stockholm Data Parks" loading="lazy"><figcaption><span class="sl">Värtaverket, toplarna omrežja, v katero se steka toplota. </span><span class="en">Värtaverket, the district heating plant the heat feeds into. </span><a href="https://commons.wikimedia.org/wiki/File:V%C3%A4rtaverket_2008.jpg">Holger.Ellgaard</a>, CC BY-SA 3.0</figcaption></figure>
+            <h3><a href="https://stockholmdataparks.com/2017/01/20/stockholm-soon-to-be-the-future-center-for-green-data-centers/">Stockholm Data Parks</a></h3>
+            <p class="meta">Stockholm · 2017</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">kampusi podatkovnih centrov</span><span class="en">data-centre campuses</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">toplota v daljinsko ogrevanje</span><span class="en">heat into district heating</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><div class="ph">Chapelle International · <span class="sl">fotografija sledi</span><span class="en">photo to follow</span></div><figcaption></figcaption></figure>
+            <h3><a href="https://a26.diizz.com/en/portfolio/hotel-logistique-chapelle-international/">Chapelle International</a></h3>
+            <p class="meta">Paris · 2018</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">železniško-cestni terminal</span><span class="en">rail-road freight terminal</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">urbana kmetija in igrišča na strehi</span><span class="en">rooftop farm and sports fields</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/abattoir.jpg" alt="Ferme Abattoir (BIGH)" loading="lazy"><figcaption><span class="sl">vhod v Abattoir; kmetija je na strehi tržnice Foodmet. </span><span class="en">Abattoir entrance; the farm sits on the Foodmet market roof. </span><a href="https://commons.wikimedia.org/wiki/File:Abattoirs_de_Cureghem.JPG">neznan avtor</a>, CC BY-SA 3.0</figcaption></figure>
+            <h3><a href="https://www.construction21.org/infrastructure/be/abattoir-bigh-farm.html">Ferme Abattoir (BIGH)</a></h3>
+            <p class="meta">Bruxelles · 2018</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">akvaponika</span><span class="en">aquaponics</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">trgovina, delavnice nad tržnico</span><span class="en">shop, workshops above a market</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/boijmans.jpg" alt="Depot Boijmans (MVRDV)" loading="lazy"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Rotterdam_depot_boijmans.jpg">F.Eveleens</a>, CC BY 4.0</figcaption></figure>
+            <h3><a href="https://en.wikipedia.org/wiki/Depot_Museum_Boijmans_Van_Beuningen">Depot Boijmans (MVRDV)</a></h3>
+            <p class="meta">Rotterdam · 2021</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">depo zbirke</span><span class="en">collection depot</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">javno dostopen depo, restavracija</span><span class="en">public depot, restaurant</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/vaeast.jpg" alt="V&amp;A East Storehouse (DS+R)" loading="lazy"><figcaption><a href="https://commons.wikimedia.org/wiki/File:V%26A_East_Storehouse_exterior_view_01.jpg">14GTR</a>, CC0</figcaption></figure>
+            <h3><a href="https://dsrny.com/project/v-and-a-east-storehouse">V&amp;A East Storehouse (DS+R)</a></h3>
+            <p class="meta">London · 2025</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">hramba zbirke</span><span class="en">collection store</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">odprt, prehoden depo</span><span class="en">open walk-through store</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/gasometer.jpg" alt="Gasometer City" loading="lazy"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Gasometer_wien.jpg">Arne Müseler</a>, CC BY-SA 3.0 de</figcaption></figure>
+            <h3><a href="https://en.wikipedia.org/wiki/Vienna_Gasometers">Gasometer City</a></h3>
+            <p class="meta">Wien · 2001</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">nekdanji plinohrami</span><span class="en">former gas holders</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">stanovanja, pisarne, dvorana</span><span class="en">housing, offices, hall</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/zollverein.jpg" alt="Zollverein" loading="lazy"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Zeche_Zollverein_abends.jpg">Thomas Wolf, www.foto-tw.de</a>, CC BY-SA 3.0 de</figcaption></figure>
+            <h3><a href="https://en.wikipedia.org/wiki/Zollverein_Coal_Mine_Industrial_Complex">Zollverein</a></h3>
+            <p class="meta">Essen · 2001</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">nekdanji rudnik in koksarna</span><span class="en">former mine and coking plant</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">muzej, kultura, drsališče</span><span class="en">museum, culture, ice rink</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/rog.jpg" alt="Center Rog (BAX)" loading="lazy"><figcaption><span class="sl">stanje pred prenovo, 2019. </span><span class="en">before the renovation, 2019. </span><a href="https://commons.wikimedia.org/wiki/File:Ljubljana_-_Rog_Factory_(48754231053).jpg">Fred Romero from Paris, France</a>, CC BY 2.0</figcaption></figure>
+            <h3><a href="https://en.wikipedia.org/wiki/Center_Rog">Center Rog (BAX)</a></h3>
+            <p class="meta">Ljubljana · 2023</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">nekdanja tovarna koles</span><span class="en">former bicycle factory</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">javni produkcijski center</span><span class="en">public production centre</span></dd></dl>
+          </article>
+      </div>
+      <p class="meta" style="margin-top:16px"><span class="sl">Fotografije: Wikimedia Commons, avtorji in licence ob slikah.</span><span class="en">Photos: Wikimedia Commons, authors and licences with each image.</span></p>
+    </div>
+  </section>
+</div>
+
+<!-- ============ PREGLED ============ -->
+</main>
+<div class="lb" id="lb" role="dialog" aria-label="Povečava"><img alt=""><p></p></div>
+
+<footer>
+  <span>Odzivni teritoriji / Responsive Territories · UL FA 2026/27</span>
+  <span>doc. dr. Tomaž Berčič · <span class="sl">osnutek</span><span class="en">draft</span> v1.0 · 2026-11-14</span>
+</footer>
+
+<script>
+(function () {
+  var body = document.body;
+  var views = ['uvod', 'vaja-1', 'vaja-2'];
+  function show() {
+    var h = (location.hash || '').replace('#', '');
+    if (views.indexOf(h) < 0) h = 'uvod';
+    views.forEach(function (v) {
+      var el = document.getElementById('v-' + v);
+      if (el) el.hidden = (v !== h);
+    });
+    document.querySelectorAll('nav.views a').forEach(function (a) {
+      if (a.getAttribute('data-view') === h) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
+    });
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', show);
+  show();
+  document.getElementById('acc-open').addEventListener('click', function () { document.querySelectorAll('details.acc').forEach(function (d) { d.open = true; }); });
+  document.getElementById('acc-close').addEventListener('click', function () { document.querySelectorAll('details.acc').forEach(function (d) { d.open = false; }); });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.strip-nav .sb'); if (!b) return;
+    var strip = b.closest('.student').querySelector('.cases');
+    strip.scrollBy({ left: Number(b.getAttribute('data-dir')) * strip.clientWidth * 0.8, behavior: 'smooth' });
+  });
+  document.addEventListener('click', function (e) {
+    var f = e.target.closest('.cmp-f');
+    if (f) {
+      var key = f.getAttribute('data-f'); var tbl = document.querySelector('table.cmp');
+      tbl.setAttribute('data-f', key);
+      document.querySelectorAll('.cmp-f').forEach(function (x) { x.setAttribute('aria-pressed', x === f); });
+      tbl.querySelectorAll('th.case-h').forEach(function (th) { th.colSpan = key === 'all' ? 4 : 1; });
+      return;
+    }
+    var n = e.target.closest('.cmp-s');
+    if (n) { var w = document.querySelector('.cmp-wrap'); w.scrollBy({ left: Number(n.getAttribute('data-dir')) * w.clientWidth * 0.8, behavior: 'smooth' }); }
+  });
+  var lb = document.getElementById('lb');
+  document.addEventListener('click', function (e) {
+    var img = e.target.closest('figure.zoomable img');
+    if (img) { lb.querySelector('img').src = img.src; var c = img.parentNode.querySelector('figcaption'); lb.querySelector('p').textContent = c ? c.innerText : ''; lb.classList.add('on'); return; }
+    if (e.target.closest('#lb')) lb.classList.remove('on');
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('on'); });
+  function setLang(l) {
+    body.setAttribute('data-lang', l);
+    document.documentElement.lang = l;
+    document.getElementById('btn-sl').setAttribute('aria-pressed', l === 'sl');
+    document.getElementById('btn-en').setAttribute('aria-pressed', l === 'en');
+    try { localStorage.setItem('ot-lang', l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('ot-lang'); } catch (e) {}
+  if (saved === 'en' || saved === 'sl') setLang(saved);
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-set')); });
+  });
+})();
+</script>
+</body>
+</html>
