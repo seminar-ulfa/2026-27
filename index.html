@@ -171,6 +171,15 @@ details[open] > summary .tog::before { content: "\2013"; }
 .ref dl { margin: 6px 0 0; display: grid; gap: 2px; font-size: 14px; }
 .ref dt { font: 500 10px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-top: 4px; }
 .ref dd { margin: 0; }
+.refline { font-size: 14px; margin: 10px 0 0; }
+.refline .k { font: 500 11px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-right: 8px; }
+.ref-idx { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.ref-idx a { display: inline-flex; gap: 8px; align-items: baseline; padding: 6px 10px; border: 1px solid var(--context); color: var(--ink); text-decoration: none; font-size: 14px; }
+.ref-idx a:hover { border-color: var(--industry); color: var(--industry); }
+.ref-idx .no { font: 500 11px/1 var(--mono); color: var(--industry); }
+#v-vaja-2 details.acc > summary .no { font-size: 32px; }
+.ref .ph { flex-wrap: wrap; align-content: flex-end; gap: 0 4px; }
+.ref-credit { padding-top: 16px; }
 
 
 /* primeri in statistike */
@@ -501,19 +510,19 @@ footer { max-width: 1180px; margin: 0 auto; padding: 24px; border-top: 1px solid
 
       <article class="student" id="t-anastasija">
         <div class="who"><h3>Anastasija</h3><div class="cat"><span class="sl">Podatki in digitalna infrastruktura</span><span class="en">Data &amp; digital infrastructure</span></div></div>
-        <div><h3><span class="sl">Ekološki podatkovni center</span><span class="en">Ecological data centre</span></h3></div>
+        <div><h3><span class="sl">Ekološki podatkovni center</span><span class="en">Ecological data centre</span></h3><p class="refline"><span class="k"><span class="sl">Referenčni primeri</span><span class="en">Reference projects</span></span> <a href="#vaja-2" data-goto="ref-anastasija">Deep Green, Stockholm Data Parks</a></p></div>
       </article>
       <article class="student" id="t-eleonora">
         <div class="who"><h3>Eleonora</h3><div class="cat"><span class="sl">Energija</span><span class="en">Energy</span></div></div>
-        <div><h3><span class="sl">Vodikarna: zeleni vodik z elektrolizo in rabo odpadne toplote</span><span class="en">Hydrogen plant: green hydrogen by electrolysis, using waste heat</span></h3><p><span class="sl">Izhodišče so ljubljanski avtobusi na vodik; možna je polnilnica za vlake ob železnici in zamenjava zemeljskega plina v delu industrije. Dodana javna raba: bazen, savna, rastlinjak, ogrevanje sosesk.</span><span class="en">Starting point: Ljubljana's hydrogen buses; a train refuelling station by the railway and replacing natural gas in parts of industry are possible. Added public use: pool, sauna, greenhouse, heating for neighbourhoods.</span></p></div>
+        <div><h3><span class="sl">Vodikarna: zeleni vodik z elektrolizo in rabo odpadne toplote</span><span class="en">Hydrogen plant: green hydrogen by electrolysis, using waste heat</span></h3><p><span class="sl">Izhodišče so ljubljanski avtobusi na vodik; možna je polnilnica za vlake ob železnici in zamenjava zemeljskega plina v delu industrije. Dodana javna raba: bazen, savna, rastlinjak, ogrevanje sosesk.</span><span class="en">Starting point: Ljubljana's hydrogen buses; a train refuelling station by the railway and replacing natural gas in parts of industry are possible. Added public use: pool, sauna, greenhouse, heating for neighbourhoods.</span></p><p class="refline"><span class="k"><span class="sl">Referenčni primeri</span><span class="en">Reference projects</span></span> <a href="#vaja-2" data-goto="ref-eleonora">Energiebunker Wilhelmsburg</a></p></div>
       </article>
       <article class="student" id="t-natalia">
         <div class="who"><h3>Natalia</h3><div class="cat"><span class="sl">Hrana in urbano kmetijstvo</span><span class="en">Food &amp; urban farming</span></div></div>
-        <div><h3><span class="sl">Vertikalna urbana kmetija s hidroponiko</span><span class="en">Vertical urban farm with hydroponics</span></h3><p><span class="sl">Nov objekt s tlorisom okoli 2.000–4.000 m². Javna raba: prodajalna, izobraževalni center, ogledi, skupnostni prostor. Sinergije: sončna elektrarna, deževnica, odvečna toplota sosednjih obratov. Referenca: La Cité Maraîchère, Romainville.</span><span class="en">A new building of roughly 2,000–4,000 m² footprint. Public use: shop, education centre, tours, community room. Synergies: rooftop solar, rainwater, waste heat from neighbouring plants. Reference: La Cité Maraîchère, Romainville.</span></p></div>
+        <div><h3><span class="sl">Vertikalna urbana kmetija s hidroponiko</span><span class="en">Vertical urban farm with hydroponics</span></h3><p><span class="sl">Nov objekt s tlorisom okoli 2.000–4.000 m². Javna raba: prodajalna, izobraževalni center, ogledi, skupnostni prostor. Sinergije: sončna elektrarna, deževnica, odvečna toplota sosednjih obratov.</span><span class="en">A new building of roughly 2,000–4,000 m² footprint. Public use: shop, education centre, tours, community room. Synergies: rooftop solar, rainwater, waste heat from neighbouring plants.</span></p><p class="refline"><span class="k"><span class="sl">Referenčni primeri</span><span class="en">Reference projects</span></span> <a href="#vaja-2" data-goto="ref-natalia">La Cité Maraîchère, Ferme Abattoir, Chapelle International</a></p></div>
       </article>
       <article class="student" id="t-jovana">
         <div class="who"><h3>Jovana</h3><div class="cat"><span class="sl">Hramba, arhivi, depoji</span><span class="en">Storage, archives, depots</span></div></div>
-        <div><h3><span class="sl">Sodobni mestni arhiv in center za digitalno ohranjanje</span><span class="en">Contemporary city archive and digital preservation centre</span></h3><p><span class="sl">Hramba fizične in digitalne dediščine z javnim dostopom: čitalnica, digitalne razstave, delavnice, raziskovalni prostori. Referenca: Noora, Estonski nacionalni arhiv, Tartu.</span><span class="en">Storage of physical and digital heritage with public access: reading room, digital exhibitions, workshops, research spaces. Reference: Noora, National Archives of Estonia, Tartu.</span></p></div>
+        <div><h3><span class="sl">Sodobni mestni arhiv in center za digitalno ohranjanje</span><span class="en">Contemporary city archive and digital preservation centre</span></h3><p><span class="sl">Hramba fizične in digitalne dediščine z javnim dostopom: čitalnica, digitalne razstave, delavnice, raziskovalni prostori.</span><span class="en">Storage of physical and digital heritage with public access: reading room, digital exhibitions, workshops, research spaces.</span></p><p class="refline"><span class="k"><span class="sl">Referenčni primeri</span><span class="en">Reference projects</span></span> <a href="#vaja-2" data-goto="ref-jovana">Noora, Depot Boijmans, V&amp;A East Storehouse</a></p></div>
       </article>
     </div>
   </section>
@@ -531,10 +540,34 @@ footer { max-width: 1180px; margin: 0 auto; padding: 24px; border-top: 1px solid
     </div>
   </section>
 
-  <section class="blk">
-    <div class="label"><span class="no">2.3</span><span class="sl">Reference</span><span class="en">References</span></div>
+  <section class="blk" id="ref-uvod">
+    <div class="label"><span class="no">2.3</span><span class="sl">Referenčni primeri</span><span class="en">Reference projects</span></div>
     <div>
-      <h2><span class="sl">Tehnična raba z javnim programom</span><span class="en">Technical use with a public programme</span></h2>
+      <h2><span class="sl">Skupna zbirka, ločena po nalogah</span><span class="en">One collection, sorted by task</span></h2>
+      <p><span class="sl">Referenčni primeri so zbrani na enem mestu in brani po isti metodi, razvrščeni pa so po nalogah. Vsaka skupina je del procesa posamezne naloge in se dopolnjuje skupaj z njo; skupni zgledi veljajo za vse.</span><span class="en">Reference projects are collected in one place and read with the same method, but sorted by task. Each group is part of that task's process and grows with it; the shared models apply to all.</span></p>
+      <ul class="ref-idx"><li><a href="#vaja-2" data-goto="ref-metoda"><span class="no">2.3.1</span><span class="sl">Metodologija</span><span class="en">Method</span></a></li><li><a href="#vaja-2" data-goto="ref-skupni"><span class="no">2.3.2</span><span class="sl">Skupni zgledi</span><span class="en">Shared models</span></a></li><li><a href="#vaja-2" data-goto="ref-anastasija"><span class="no">2.3.3</span><span class="sl">Podatki · Anastasija</span><span class="en">Data · Anastasija</span></a></li><li><a href="#vaja-2" data-goto="ref-eleonora"><span class="no">2.3.4</span><span class="sl">Energija · Eleonora</span><span class="en">Energy · Eleonora</span></a></li><li><a href="#vaja-2" data-goto="ref-natalia"><span class="no">2.3.5</span><span class="sl">Hrana · Natalia</span><span class="en">Food · Natalia</span></a></li><li><a href="#vaja-2" data-goto="ref-jovana"><span class="no">2.3.6</span><span class="sl">Hramba · Jovana</span><span class="en">Storage · Jovana</span></a></li></ul>
+    </div>
+  </section>
+
+  <details class="acc" id="ref-metoda" open>
+    <summary><span class="label"><span class="no">2.3.1</span><span class="sl">Metodologija</span><span class="en">Method</span></span><h2><span class="sl">Kako beremo referenčni primer</span><span class="en">How we read a reference project</span></h2><span class="tog" aria-hidden="true"></span></summary>
+    <div class="acc-body"><div>
+      <p><span class="sl">Vsak primer opišemo po istih kategorijah, da so primeri med seboj in z lokacijo v ljubljanskem obroču primerljivi. Kartice v zbirki kažejo prvi dve kategoriji; ostale se dopolnjujejo v procesu posamezne naloge.</span><span class="en">Every case is described with the same categories so that cases can be compared with each other and with a site in the Ljubljana ring. The cards show the first two; the rest are added within each task's process.</span></p>
+      <ol class="steps">
+        <li><div><h3><span class="sl">Tehnična raba</span><span class="en">Technical use</span></h3><p><span class="sl">Kaj objekt proizvaja, predeluje ali hrani in kakšne obratovalne zahteve ima.</span><span class="en">What the building produces, processes or stores, and what it needs to operate.</span></p></div></li>
+        <li><div><h3><span class="sl">Javna raba</span><span class="en">Public use</span></h3><p><span class="sl">Kateri program je dodan, komu je namenjen in kako je dostopen.</span><span class="en">Which programme is added, for whom, and how it is accessed.</span></p></div></li>
+        <li><div><h3><span class="sl">Tokovi in sinergije</span><span class="en">Flows and synergies</span></h3><p><span class="sl">Toplota, energija, voda in material med tehnično rabo, javno rabo in sosednjimi obrati.</span><span class="en">Heat, energy, water and material exchanged between the technical use, the public use and neighbouring plants.</span></p></div></li>
+        <li><div><h3><span class="sl">Merilo</span><span class="en">Scale</span></h3><p><span class="sl">Tloris, bruto površina in višina, primerjani z velikostjo industrijskih območij v obroču.</span><span class="en">Footprint, gross floor area and height, compared with the size of industrial areas in the ring.</span></p></div></li>
+        <li><div><h3><span class="sl">Odnos do mesta</span><span class="en">Relation to the city</span></h3><p><span class="sl">Lega v tkivu, robovi, dostop in pritličje: kako se tehnična stavba poveže z okolico.</span><span class="en">Position in the urban fabric, edges, access and ground floor: how the technical building connects to its surroundings.</span></p></div></li>
+        <li><div><h3><span class="sl">Prenos v Ljubljano</span><span class="en">Transfer to Ljubljana</span></h3><p><span class="sl">Kaj je prenosljivo na izbrano lokacijo v obroču in kaj ne.</span><span class="en">What can be transferred to the chosen site in the ring, and what cannot.</span></p></div></li>
+      </ol>
+    </div></div>
+  </details>
+
+  <details class="acc" id="ref-skupni">
+    <summary><span class="label"><span class="no">2.3.2</span><span class="sl">Skupni zgledi</span><span class="en">Shared models</span></span><h2><span class="sl">Načelo za vse naloge</span><span class="en">The principle for every task</span></h2><span class="tog" aria-hidden="true"></span></summary>
+    <div class="acc-body"><div>
+      <p><span class="sl">Primeri, ki ne pripadajo eni rabi, ampak pokažejo načelo: tehnični objekt, ki dobi javni program, ali industrijska dediščina z novo vsebino. CopenHill je metodološki zgled vaje.</span><span class="en">Cases that belong to no single use but show the principle: a technical building that gains a public programme, or industrial heritage with a new content. CopenHill is the methodological model of the exercise.</span></p>
       <div class="refs">
           <article class="ref">
             <figure><img src="img/ref/copenhill.jpg" alt="CopenHill (BIG)" loading="lazy"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Amager_Bakke_Copenhagen_1.jpg">kallerna</a>, CC BY-SA 4.0</figcaption></figure>
@@ -549,55 +582,6 @@ footer { max-width: 1180px; margin: 0 auto; padding: 24px; border-top: 1px solid
             <p class="meta">Wien · 1992</p>
             <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">sežigalnica, daljinsko ogrevanje</span><span class="en">incineration, district heating</span></dd>
             <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">mestni simbol, prenova fasade</span><span class="en">landmark, facade redesign</span></dd></dl>
-          </article>
-          <article class="ref">
-            <figure><img src="img/ref/energiebunker.jpg" alt="Energiebunker Wilhelmsburg" loading="lazy"><figcaption><span class="sl">notranjost, energetska oprema. </span><span class="en">interior, energy plant. </span><a href="https://commons.wikimedia.org/wiki/File:Energiebunker-Wilhelmsburg-397-0011-hinnerk-ruemenapf.jpg">Hinnerk Rümenapf (Hinnerk R)</a>, CC BY-SA 4.0</figcaption></figure>
-            <h3><a href="https://www.internationale-bauausstellungen.de/en/history/2006-2013-iba-hamburg-leap-across-the-elbe/energy-bunker-a-memorial-powers-the-district/">Energiebunker Wilhelmsburg</a></h3>
-            <p class="meta">Hamburg · 2013</p>
-            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">hranilnik toplote v bunkerju</span><span class="en">heat storage in a bunker</span></dd>
-            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">kavarna, razgledna terasa</span><span class="en">café, viewing terrace</span></dd></dl>
-          </article>
-          <article class="ref">
-            <figure><div class="ph">Deep Green, Exmouth · <span class="sl">fotografija sledi</span><span class="en">photo to follow</span></div><figcaption></figcaption></figure>
-            <h3><a href="https://www.ribaj.com/spec/devon-pool-demos-new-model-for-data-centre-cooling/">Deep Green, Exmouth</a></h3>
-            <p class="meta">Exmouth · 2023</p>
-            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">majhen podatkovni center</span><span class="en">small data centre</span></dd>
-            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">toplota greje javni bazen</span><span class="en">heat warms a public pool</span></dd></dl>
-          </article>
-          <article class="ref">
-            <figure><img src="img/ref/stockholm.jpg" alt="Stockholm Data Parks" loading="lazy"><figcaption><span class="sl">Värtaverket, toplarna omrežja, v katero se steka toplota. </span><span class="en">Värtaverket, the district heating plant the heat feeds into. </span><a href="https://commons.wikimedia.org/wiki/File:V%C3%A4rtaverket_2008.jpg">Holger.Ellgaard</a>, CC BY-SA 3.0</figcaption></figure>
-            <h3><a href="https://stockholmdataparks.com/2017/01/20/stockholm-soon-to-be-the-future-center-for-green-data-centers/">Stockholm Data Parks</a></h3>
-            <p class="meta">Stockholm · 2017</p>
-            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">kampusi podatkovnih centrov</span><span class="en">data-centre campuses</span></dd>
-            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">toplota v daljinsko ogrevanje</span><span class="en">heat into district heating</span></dd></dl>
-          </article>
-          <article class="ref">
-            <figure><div class="ph">Chapelle International · <span class="sl">fotografija sledi</span><span class="en">photo to follow</span></div><figcaption></figcaption></figure>
-            <h3><a href="https://a26.diizz.com/en/portfolio/hotel-logistique-chapelle-international/">Chapelle International</a></h3>
-            <p class="meta">Paris · 2018</p>
-            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">železniško-cestni terminal</span><span class="en">rail-road freight terminal</span></dd>
-            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">urbana kmetija in igrišča na strehi</span><span class="en">rooftop farm and sports fields</span></dd></dl>
-          </article>
-          <article class="ref">
-            <figure><img src="img/ref/abattoir.jpg" alt="Ferme Abattoir (BIGH)" loading="lazy"><figcaption><span class="sl">vhod v Abattoir; kmetija je na strehi tržnice Foodmet. </span><span class="en">Abattoir entrance; the farm sits on the Foodmet market roof. </span><a href="https://commons.wikimedia.org/wiki/File:Abattoirs_de_Cureghem.JPG">neznan avtor</a>, CC BY-SA 3.0</figcaption></figure>
-            <h3><a href="https://www.construction21.org/infrastructure/be/abattoir-bigh-farm.html">Ferme Abattoir (BIGH)</a></h3>
-            <p class="meta">Bruxelles · 2018</p>
-            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">akvaponika</span><span class="en">aquaponics</span></dd>
-            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">trgovina, delavnice nad tržnico</span><span class="en">shop, workshops above a market</span></dd></dl>
-          </article>
-          <article class="ref">
-            <figure><img src="img/ref/boijmans.jpg" alt="Depot Boijmans (MVRDV)" loading="lazy"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Rotterdam_depot_boijmans.jpg">F.Eveleens</a>, CC BY 4.0</figcaption></figure>
-            <h3><a href="https://en.wikipedia.org/wiki/Depot_Museum_Boijmans_Van_Beuningen">Depot Boijmans (MVRDV)</a></h3>
-            <p class="meta">Rotterdam · 2021</p>
-            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">depo zbirke</span><span class="en">collection depot</span></dd>
-            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">javno dostopen depo, restavracija</span><span class="en">public depot, restaurant</span></dd></dl>
-          </article>
-          <article class="ref">
-            <figure><img src="img/ref/vaeast.jpg" alt="V&amp;A East Storehouse (DS+R)" loading="lazy"><figcaption><a href="https://commons.wikimedia.org/wiki/File:V%26A_East_Storehouse_exterior_view_01.jpg">14GTR</a>, CC0</figcaption></figure>
-            <h3><a href="https://dsrny.com/project/v-and-a-east-storehouse">V&amp;A East Storehouse (DS+R)</a></h3>
-            <p class="meta">London · 2025</p>
-            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">hramba zbirke</span><span class="en">collection store</span></dd>
-            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">odprt, prehoden depo</span><span class="en">open walk-through store</span></dd></dl>
           </article>
           <article class="ref">
             <figure><img src="img/ref/gasometer.jpg" alt="Gasometer City" loading="lazy"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Gasometer_wien.jpg">Arne Müseler</a>, CC BY-SA 3.0 de</figcaption></figure>
@@ -621,9 +605,109 @@ footer { max-width: 1180px; margin: 0 auto; padding: 24px; border-top: 1px solid
             <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">javni produkcijski center</span><span class="en">public production centre</span></dd></dl>
           </article>
       </div>
-      <p class="meta" style="margin-top:16px"><span class="sl">Fotografije: Wikimedia Commons, avtorji in licence ob slikah.</span><span class="en">Photos: Wikimedia Commons, authors and licences with each image.</span></p>
-    </div>
-  </section>
+    </div></div>
+  </details>
+
+  <details class="acc" id="ref-anastasija">
+    <summary><span class="label"><span class="no">2.3.3</span><span class="sl">Podatki · Anastasija</span><span class="en">Data · Anastasija</span></span><h2><span class="sl">Ekološki podatkovni center</span><span class="en">Ecological data centre</span></h2><span class="tog" aria-hidden="true"></span></summary>
+    <div class="acc-body"><div>
+      <p><span class="sl">Podatkovni centri, katerih odpadna toplota greje javne ali mestne sisteme.</span><span class="en">Data centres whose waste heat warms public or city systems.</span></p>
+      <div class="refs">
+          <article class="ref">
+            <figure><div class="ph">Deep Green, Exmouth · <span class="sl">fotografija sledi</span><span class="en">photo to follow</span></div><figcaption></figcaption></figure>
+            <h3><a href="https://www.ribaj.com/spec/devon-pool-demos-new-model-for-data-centre-cooling/">Deep Green, Exmouth</a></h3>
+            <p class="meta">Exmouth · 2023</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">majhen podatkovni center</span><span class="en">small data centre</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">toplota greje javni bazen</span><span class="en">heat warms a public pool</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/stockholm.jpg" alt="Stockholm Data Parks" loading="lazy"><figcaption><span class="sl">Värtaverket, toplarna omrežja, v katero se steka toplota. </span><span class="en">Värtaverket, the district heating plant the heat feeds into. </span><a href="https://commons.wikimedia.org/wiki/File:V%C3%A4rtaverket_2008.jpg">Holger.Ellgaard</a>, CC BY-SA 3.0</figcaption></figure>
+            <h3><a href="https://stockholmdataparks.com/2017/01/20/stockholm-soon-to-be-the-future-center-for-green-data-centers/">Stockholm Data Parks</a></h3>
+            <p class="meta">Stockholm · 2017</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">kampusi podatkovnih centrov</span><span class="en">data-centre campuses</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">toplota v daljinsko ogrevanje</span><span class="en">heat into district heating</span></dd></dl>
+          </article>
+      </div>
+    </div></div>
+  </details>
+
+  <details class="acc" id="ref-eleonora">
+    <summary><span class="label"><span class="no">2.3.4</span><span class="sl">Energija · Eleonora</span><span class="en">Energy · Eleonora</span></span><h2><span class="sl">Vodikarna</span><span class="en">Hydrogen plant</span></h2><span class="tog" aria-hidden="true"></span></summary>
+    <div class="acc-body"><div>
+      <p><span class="sl">Energetski objekti s hranjenjem toplote in dostopnim javnim delom.</span><span class="en">Energy buildings with heat storage and an accessible public part.</span></p>
+      <div class="refs">
+          <article class="ref">
+            <figure><img src="img/ref/energiebunker.jpg" alt="Energiebunker Wilhelmsburg" loading="lazy"><figcaption><span class="sl">notranjost, energetska oprema. </span><span class="en">interior, energy plant. </span><a href="https://commons.wikimedia.org/wiki/File:Energiebunker-Wilhelmsburg-397-0011-hinnerk-ruemenapf.jpg">Hinnerk Rümenapf (Hinnerk R)</a>, CC BY-SA 4.0</figcaption></figure>
+            <h3><a href="https://www.internationale-bauausstellungen.de/en/history/2006-2013-iba-hamburg-leap-across-the-elbe/energy-bunker-a-memorial-powers-the-district/">Energiebunker Wilhelmsburg</a></h3>
+            <p class="meta">Hamburg · 2013</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">hranilnik toplote v bunkerju</span><span class="en">heat storage in a bunker</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">kavarna, razgledna terasa</span><span class="en">café, viewing terrace</span></dd></dl>
+          </article>
+      </div>
+    </div></div>
+  </details>
+
+  <details class="acc" id="ref-natalia">
+    <summary><span class="label"><span class="no">2.3.5</span><span class="sl">Hrana · Natalia</span><span class="en">Food · Natalia</span></span><h2><span class="sl">Vertikalna urbana kmetija</span><span class="en">Vertical urban farm</span></h2><span class="tog" aria-hidden="true"></span></summary>
+    <div class="acc-body"><div>
+      <p><span class="sl">Pridelava hrane v mestu, na strehah ali v samostojnem objektu, z izobraževanjem in prodajo.</span><span class="en">Food production in the city, on roofs or in a dedicated building, with education and sales.</span></p>
+      <div class="refs">
+          <article class="ref">
+            <figure><div class="ph">La Cité Maraîchère · <span class="sl">fotografija sledi</span><span class="en">photo to follow</span></div><figcaption></figcaption></figure>
+            <h3><a href="https://www.metalocus.es/en/news/vertical-urban-agriculture-la-cite-maraichere-ilimelgo">La Cité Maraîchère (ilimelgo)</a></h3>
+            <p class="meta">Romainville · 2021</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">navpični rastlinjak, mestno vrtnarstvo</span><span class="en">vertical greenhouse, urban market garden</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">izobraževanje, program za sosesko</span><span class="en">education, neighbourhood programme</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/abattoir.jpg" alt="Ferme Abattoir (BIGH)" loading="lazy"><figcaption><span class="sl">vhod v Abattoir; kmetija je na strehi tržnice Foodmet. </span><span class="en">Abattoir entrance; the farm sits on the Foodmet market roof. </span><a href="https://commons.wikimedia.org/wiki/File:Abattoirs_de_Cureghem.JPG">neznan avtor</a>, CC BY-SA 3.0</figcaption></figure>
+            <h3><a href="https://www.construction21.org/infrastructure/be/abattoir-bigh-farm.html">Ferme Abattoir (BIGH)</a></h3>
+            <p class="meta">Bruxelles · 2018</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">akvaponika</span><span class="en">aquaponics</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">trgovina, delavnice nad tržnico</span><span class="en">shop, workshops above a market</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><div class="ph">Chapelle International · <span class="sl">fotografija sledi</span><span class="en">photo to follow</span></div><figcaption></figcaption></figure>
+            <h3><a href="https://a26.diizz.com/en/portfolio/hotel-logistique-chapelle-international/">Chapelle International</a></h3>
+            <p class="meta">Paris · 2018</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">železniško-cestni terminal</span><span class="en">rail-road freight terminal</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">urbana kmetija in igrišča na strehi</span><span class="en">rooftop farm and sports fields</span></dd></dl>
+          </article>
+      </div>
+    </div></div>
+  </details>
+
+  <details class="acc" id="ref-jovana">
+    <summary><span class="label"><span class="no">2.3.6</span><span class="sl">Hramba · Jovana</span><span class="en">Storage · Jovana</span></span><h2><span class="sl">Mestni arhiv in digitalno ohranjanje</span><span class="en">City archive and digital preservation</span></h2><span class="tog" aria-hidden="true"></span></summary>
+    <div class="acc-body"><div>
+      <p><span class="sl">Depoji in arhivi, ki hrambo odprejo javnosti.</span><span class="en">Depots and archives that open storage to the public.</span></p>
+      <div class="refs">
+          <article class="ref">
+            <figure><div class="ph">Noora, Tartu · <span class="sl">fotografija sledi</span><span class="en">photo to follow</span></div><figcaption></figcaption></figure>
+            <h3><a href="https://www.ra.ee/en/national-archives/noora/"><span class="sl">Noora, Estonski nacionalni arhiv</span><span class="en">Noora, National Archives of Estonia</span></a></h3>
+            <p class="meta">Tartu · 2017</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">arhivski depoji, fizično in digitalno gradivo</span><span class="en">archive repositories, physical and digital records</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">čitalnica, razstave, dvorana, vodstva po depojih</span><span class="en">reading room, exhibitions, hall, repository tours</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/boijmans.jpg" alt="Depot Boijmans (MVRDV)" loading="lazy"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Rotterdam_depot_boijmans.jpg">F.Eveleens</a>, CC BY 4.0</figcaption></figure>
+            <h3><a href="https://en.wikipedia.org/wiki/Depot_Museum_Boijmans_Van_Beuningen">Depot Boijmans (MVRDV)</a></h3>
+            <p class="meta">Rotterdam · 2021</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">depo zbirke</span><span class="en">collection depot</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">javno dostopen depo, restavracija</span><span class="en">public depot, restaurant</span></dd></dl>
+          </article>
+          <article class="ref">
+            <figure><img src="img/ref/vaeast.jpg" alt="V&amp;A East Storehouse (DS+R)" loading="lazy"><figcaption><a href="https://commons.wikimedia.org/wiki/File:V%26A_East_Storehouse_exterior_view_01.jpg">14GTR</a>, CC0</figcaption></figure>
+            <h3><a href="https://dsrny.com/project/v-and-a-east-storehouse">V&amp;A East Storehouse (DS+R)</a></h3>
+            <p class="meta">London · 2025</p>
+            <dl><dt><span class="sl">Tehnična raba</span><span class="en">Technical use</span></dt><dd><span class="sl">hramba zbirke</span><span class="en">collection store</span></dd>
+            <dt><span class="sl">Javna raba</span><span class="en">Public use</span></dt><dd><span class="sl">odprt, prehoden depo</span><span class="en">open walk-through store</span></dd></dl>
+          </article>
+      </div>
+    </div></div>
+  </details>
+  <div class="acc-body ref-credit"><div><p class="meta"><span class="sl">Fotografije: Wikimedia Commons, avtorji in licence ob slikah.</span><span class="en">Photos: Wikimedia Commons, authors and licences with each image.</span></p></div></div>
+
 </div>
 
 <!-- ============ PREGLED ============ -->
@@ -632,7 +716,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 24px; border-top: 1px solid
 
 <footer>
   <span>Odzivni teritoriji / Responsive Territories · UL FA 2026/27</span>
-  <span>doc. dr. Tomaž Berčič · <span class="sl">osnutek</span><span class="en">draft</span> v1.0 · 2026-11-14</span>
+  <span>doc. dr. Tomaž Berčič · <span class="sl">osnutek</span><span class="en">draft</span> v1.1 · 2026-11-17</span>
 </footer>
 
 <script>
@@ -672,6 +756,14 @@ footer { max-width: 1180px; margin: 0 auto; padding: 24px; border-top: 1px solid
     }
     var n = e.target.closest('.cmp-s');
     if (n) { var w = document.querySelector('.cmp-wrap'); w.scrollBy({ left: Number(n.getAttribute('data-dir')) * w.clientWidth * 0.8, behavior: 'smooth' }); }
+  });
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest('[data-goto]'); if (!g) return;
+    var t = document.getElementById(g.getAttribute('data-goto')); if (!t) return;
+    e.preventDefault();
+    if (t.tagName === 'DETAILS') t.open = true;
+    var hd = document.querySelector('header.top'), off = hd ? hd.offsetHeight + 8 : 0;
+    window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - off, behavior: 'smooth' });
   });
   var lb = document.getElementById('lb');
   document.addEventListener('click', function (e) {
